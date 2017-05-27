@@ -34,7 +34,7 @@ function generateID(obj) {
 
 module.exports = {
     clear: () => {
-        if (process.env.NODE_ENV === 'dev')
+        if (process.env.NODE_ENV === 'test')
             db.setState(initialState);
         else
             throw new Error('This method is only available for testing!');
