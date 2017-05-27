@@ -34,7 +34,10 @@ function generateID(obj) {
 
 module.exports = {
     clear: () => {
-        db.setState(initialState);
+        if (process.env.NODE_ENV === 'dev')
+            db.setState(initialState);
+        else
+            throw new Error('This method is only available for testing!');
     },
     post: (structure,obj) => db.get(structure).push(generateID(obj)).write(),
     get: (structure,criteria) =>
