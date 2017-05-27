@@ -4,8 +4,9 @@
   "description": "Plant a seed of good and see the world bloom!",
   "main": "index.js",
   "scripts": {
-    "start": "babel src --out-dir bin && NODE_ENV=dev node bin/index.js",
-    "test": "NODE_ENV=test mocha"
+    "start": "npm run compile && NODE_ENV=dev node bin/index.js",
+    "test": "npm run compile && NODE_ENV=test mocha",
+    "compile": "babel src --out-dir bin"
   },
   "repository": {
     "type": "git",

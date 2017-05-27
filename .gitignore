@@ -61,6 +61,6 @@ typings/
 docs
 bin
 script-compiled.js
-database/dsv.js
+database/dev.js
 database/test.js
 database/prd.js
