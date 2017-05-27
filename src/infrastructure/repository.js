@@ -28,6 +28,7 @@ let initialState = {
 db.defaults(initialState).write();
 
 function generateID(obj) {
+    if (obj.id) throw new Error('This object already has an ID!');
     obj.id = uuidV4();
     return obj;
 }
@@ -39,8 +40,15 @@ module.exports = {
         else
             throw new Error('This method is only available for testing!');
     },
-    post: (structure,obj) => db.get(structure).push(generateID(obj)).write(),
     get: (structure,criteria) =>
         criteria ? db.get(structure).find(criteria).value() :
-        db.get(structure).value()
+        db.get(structure).value(),
+    push: (structure,obj) => db.get(structure).push(generateID(obj)).write()
+      [db.get(structure).size().value() - 1],
+    unshift: (structure,obj) => db.get(structure).unshift(generateID(obj)).write()[0],
+    put: (structure,criteria,obj) => {
+      db.get(structure).find(criteria).assign(obj).write()
+      return undefined
+    },
+    delete: (structure,criteria) => db.get(structure).remove(criteria).write()
 };

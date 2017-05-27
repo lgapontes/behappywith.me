@@ -60,7 +60,6 @@ typings/
 # My files and folders
 docs
 bin
-script-compiled.js
-database/dev.js
-database/test.js
-database/prd.js
+database/test.json
+database/dev.json
+database/prd.json
