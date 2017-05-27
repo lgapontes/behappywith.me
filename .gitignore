@@ -59,4 +59,8 @@ typings/
 
 # My files and folders
 docs
+bin
 script-compiled.js
+database/dsv.js
+database/test.js
+database/prd.js

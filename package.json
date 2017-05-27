@@ -4,7 +4,8 @@
   "description": "Plant a seed of good and see the world bloom!",
   "main": "index.js",
   "scripts": {
-    "start": "babel index.js --out-file script-compiled.js && NODE_ENV=dsv node script-compiled.js"
+    "start": "babel src --out-dir bin && NODE_ENV=dev node bin/index.js",
+    "test": "NODE_ENV=test mocha"
   },
   "repository": {
     "type": "git",
@@ -20,10 +21,13 @@
   },
   "homepage": "https://github.com/lgapontes/behappywith.me#readme",
   "dependencies": {
-    "express": "^4.15.3"
+    "express": "^4.15.3",
+    "lowdb": "^0.16.2",
+    "uuid": "^3.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
-    "babel-preset-es2015": "^6.24.1"
+    "babel-preset-es2015": "^6.24.1",
+    "mocha": "^3.4.2"
   }
 }
