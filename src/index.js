@@ -8,9 +8,9 @@ app.get('/',(req,res) => {
     res.send("Ok, it's working!");
 });
 
-const repository = require('./infrastructure/repository');
+const KindnessType = require('./model/kindnessType');
 app.get('/kindnessTypes',(req,res) => {
-    res.json(repository.get('kindnessTypes'));
+    res.json(KindnessType.getAll());
 });
 
 app.listen(properties.port,() => {

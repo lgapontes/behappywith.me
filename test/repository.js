@@ -13,10 +13,14 @@ describe('Repository', function() {
             assert.deepEqual([],repository.get('kindness'));
         });
         it('Get all kindnessTypes', function() {
-            assert.deepEqual(7,repository.get('kindnessTypes').length);
+            assert.equal(7,repository.get('kindnessTypes').length);
         });
         it('Get all helped', function() {
-            assert.deepEqual(7,repository.get('helped').length);
+            assert.equal(7,repository.get('helped').length);
+        });
+        it('Get with criteria', function() {
+            let obj = repository.get('helped',{ id: 1 });
+            assert.deepEqual({ id: 1, name: 'Parents' },obj);
         });
     });
     describe('#push', function() {
