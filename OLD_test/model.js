@@ -4,6 +4,7 @@ const KindnessType = require("../bin/model/kindnessType");
 const Helped = require("../bin/model/helped");
 const JsonBased = require("../bin/model/json-based");
 const Kindness = require("../bin/model/kindness");
+const User = require("../bin/model/user");
 
 describe('Model', function() {
   before(function() {
@@ -22,8 +23,8 @@ describe('Model', function() {
         assert.ok(KindnessType.isValid(validObject));
       });
       it('Is invalid (one)', function() {
-        let validObject = { id: 1, name: 'xpto', xp: 5 };
-        assert.ok( ! KindnessType.isValid(validObject));
+        let invalidObject = { id: 1, name: 'xpto', xp: 5 };
+        assert.ok( ! KindnessType.isValid(invalidObject));
       });
       it('Is invalid (two)', function() {
         assert.ok( ! KindnessType.isValid(undefined));
@@ -42,8 +43,8 @@ describe('Model', function() {
         assert.ok(Helped.isValid(validObject));
       });
       it('Is invalid (one)', function() {
-        let validObject = { id: 1, name: 'xpto' };
-        assert.ok( ! Helped.isValid(validObject));
+        let invalidObject = { id: 1, name: 'xpto' };
+        assert.ok( ! Helped.isValid(invalidObject));
       });
       it('Is invalid (two)', function() {
         assert.ok( ! Helped.isValid(undefined));
@@ -57,20 +58,7 @@ describe('Model', function() {
         };
         let obj = new JsonBased(json);
         assert.deepEqual(json,obj);
-      });
-      /*
-      it('isValid', function() {
-        let json = {
-          propertyValid: 'value1',
-          propertyInvalidOne: undefined,
-          propertyInvalidTwo: ""
-        };
-        let obj = new JsonBased(json);
-        assert.ok( obj.isValid(obj.propertyValid) );
-        assert.ok( ! obj.isValid(obj.propertyInvalidOne) );
-        assert.ok( ! obj.isValid(obj.propertyInvalidTwo) );
-      });
-      */
+      });      
   });
   describe('#Kindness', function() {
       it('Get all', function() {
@@ -83,20 +71,20 @@ describe('Model', function() {
           kindnessType: { id: 1, name: 'Zapzap', xp: 5 },
           helped: { id: 4, name: 'Partners' }
         })
-        assert.ok(obj.isValid().length === 0);
+        assert.ok(obj.isValid().yes());
       });
       it('Date is invalid', function() {
         let obj = new Kindness({
           date: '2017-05-40'
         })
-        assert.deepEqual({ property: 'date', error: 'Invalid date!'},obj.isValid()[0]);
+        assert.deepEqual({ property: 'date', error: 'Invalid date!'},obj.isValid().errors[0]);
       });
       it('Likes is invalid', function() {
         let obj = new Kindness({
           date: '2017-05-20',
           likes: undefined
         })
-        assert.deepEqual({ property: 'likes', error: 'Invalid likes!'},obj.isValid()[0]);
+        assert.deepEqual({ property: 'likes', error: 'Invalid likes!'},obj.isValid().errors[0]);
       });
       it('kindness type is invalid', function() {
         let obj = new Kindness({
@@ -104,7 +92,7 @@ describe('Model', function() {
           likes: 0,
           kindnessType: { id: 1, name: 'Zapzap', xp: 888 }
         })
-        assert.deepEqual({ property: 'kindnessType', error: 'Invalid kindness type!'},obj.isValid()[0]);
+        assert.deepEqual({ property: 'kindnessType', error: 'Invalid kindness type!'},obj.isValid().errors[0]);
       });
       it('Helped is invalid', function() {
         let obj = new Kindness({
@@ -113,7 +101,7 @@ describe('Model', function() {
           kindnessType: { id: 1, name: 'Zapzap', xp: 5 },
           helped: { id: 4, name: 'xpto' }
         })
-        assert.deepEqual({ property: 'helped', error: 'Invalid helped!'},obj.isValid()[0]);
+        assert.deepEqual({ property: 'helped', error: 'Invalid helped!'},obj.isValid().errors[0]);
       });
       it('Full invalid', function() {
         let obj = new Kindness({
@@ -122,7 +110,39 @@ describe('Model', function() {
           kindnessType: { id: 1, name: 'Zapzap', xp: 80 },
           helped: { id: 4, name: 'xpto' }
         })
-        assert.deepEqual(4,obj.isValid().length);
+        assert.deepEqual(4,obj.isValid().errors.length);
+      });
+  });
+  describe('#User', function() {
+      it('Get all', function() {
+        assert.equal(0,User.getAll().length);
+      });
+      it('isValid', function() {
+        let obj = new User({
+          name: 'Alvarenga',
+          email: 'email@lgapontes.com'
+        })
+        assert.ok(obj.isValid().yes());
+      });
+      it('Name is invalid', function() {
+        let obj = new User({
+          name: undefined
+        })
+        assert.deepEqual({ property: 'name', error: 'Invalid name!'},obj.isValid().errors[0]);
+      });
+      it('Email is invalid (one)', function() {
+        let obj = new User({
+          name: 'Alvarenga',
+          email: undefined
+        })
+        assert.deepEqual({ property: 'email', error: 'Invalid email!'},obj.isValid().errors[0]);
+      });
+      it('Email is invalid (two)', function() {
+        let obj = new User({
+          name: 'Alvarenga',
+          email: 'email@error'
+        })
+        assert.deepEqual({ property: 'email', error: 'Invalid email!'},obj.isValid().errors[0]);
       });
   });
 });

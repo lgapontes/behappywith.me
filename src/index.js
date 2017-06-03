@@ -1,18 +1,25 @@
-const properties = require(`./conf/${process.env.NODE_ENV}`);
+const propriedades = require(`./conf/${process.env.NODE_ENV}`);
 const express = require('express');
 const app = express();
 
-if (properties.humanJson) app.set('json spaces', 4);
+const bancoDeDados = require('./infra/banco-de-dados');
+bancoDeDados.conectar();
+
+const TiposGentileza = require('./modelo/tipos-gentileza');
+
+if (propriedades.formatarJson) app.set('json spaces', 4);
 
 app.get('/',(req,res) => {
-    res.send("Ok, it's working!");
+    res.send("Ok, está funcionando!");
 });
 
-const KindnessType = require('./model/kindnessType');
-app.get('/kindnessTypes',(req,res) => {
-    res.json(KindnessType.getAll());
+app.get('/tipos-gentileza',(req,res) => {
+    TiposGentileza.getAll((error,data) => {
+        if (error) res.send(500,error);
+        else res.json(data);
+    });
 });
 
-app.listen(properties.port,() => {
-    console.log(`Server running on port ${properties.port}`);
+app.listen(propriedades.porta,() => {
+    console.log(`Servidor rodando na porta ${propriedades.porta}`);
 });

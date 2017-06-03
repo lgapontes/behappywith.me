@@ -1,7 +1,53 @@
-const properties = require(`../conf/${process.env.NODE_ENV}`);
-const low = require('lowdb');
-const uuidV4 = require('uuid/v4');
-const db = low(properties.db);
+const propriedades = require(`../conf/${process.env.NODE_ENV}`);
+const mongoose = require('mongoose');
+
+class Database {
+    constructor() {
+        mongoose.connect(propriedades.mongodb);       
+
+        /* Eventos do MongoDB */
+        mongoose.connection.on('connected', function () {  
+            console.log(`MongoDB conectado em ${process.env.NODE_ENV}`);
+        }); 
+        mongoose.connection.on('error',function (error) {  
+            console.log(`MongoDB: Erro ao conectar em ${process.env.NODE_ENV}: ${error}`);
+        }); 
+        mongoose.connection.on('disconnected', function () {  
+            console.log(`MongoDB desconectado de ${process.env.NODE_ENV}`);
+        });
+        process.on('SIGINT', function() {  
+            this.fechar();
+        });
+    }
+    fechar() {
+        mongoose.connection.close(function () { 
+            console.log(`MongoDB encerrado de ${process.env.NODE_ENV}`);
+            process.exit(0); 
+        }); 
+    }
+    static estaConectado() {
+        /*
+            readyState:
+                0 = disconnected
+                1 = connected
+                2 = connecting
+                3 = disconnecting
+        */        
+        return (mongoose.connection.readyState === 1);
+    }
+    static estaDesconectado() {
+        return ! Database.estaConectado();
+    }
+    obterConexao() {
+        return mongoose.connection;
+    }
+}
+
+module.exports = Database;
+
+
+
+/*
 
 let initialState = {
     users: [],
@@ -52,3 +98,4 @@ module.exports = {
     },
     delete: (structure,criteria) => db.get(structure).remove(criteria).write()
 };
+*/

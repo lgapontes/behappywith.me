@@ -4,9 +4,9 @@
   "description": "Plant a seed of good and see the world bloom!",
   "main": "index.js",
   "scripts": {
-    "start": "npm run compile && NODE_ENV=dev node bin/index.js",
-    "test": "npm run compile && NODE_ENV=test mocha",
-    "compile": "babel src --out-dir bin"
+    "start": "npm run compile && NODE_ENV=desenvolvimento node bin/index.js",
+    "test": "npm run compile && NODE_ENV=teste mocha",
+    "compile": "rm -rf bin/* && babel src --out-dir bin"
   },
   "repository": {
     "type": "git",
@@ -23,9 +23,8 @@
   "homepage": "https://github.com/lgapontes/behappywith.me#readme",
   "dependencies": {
     "express": "^4.15.3",
-    "lowdb": "^0.16.2",
     "moment": "^2.18.1",
-    "uuid": "^3.0.1"
+    "mongodb": "^2.2.27"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
