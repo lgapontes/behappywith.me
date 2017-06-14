@@ -56,7 +56,3 @@ typings/
 
 # dotenv environment variables file
 .env
-
-# My files and folders
-docs
-bin
