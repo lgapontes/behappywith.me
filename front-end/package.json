@@ -1,0 +1,9 @@
+{
+  "name": "behappywith.me",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Guilherme Pontes <email@lgapontes.com> (http://lgapontes.com)",
+  "license": "ISC"
+}
