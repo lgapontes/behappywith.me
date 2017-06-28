@@ -1,21 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import Ex1 from './components/exemplo/Ex1.jsx';
-import Ex2 from './components/exemplo/Ex2.jsx';
-//import Buttons from './components/exemplo/Buttons.jsx';
+import './img/favicon.ico';
+import './css/index.css';
+import './css/pure-min.css';
 
-import './index.css';
-import './pure-min.css';
-import './fonts/material-icons.css';
+import BemVindo from './components/exemplo/BemVindo.jsx';
 
 ReactDOM.render(
-    <div>
-        <button className="pure-button pure-button-primary">A Primary Button</button>
-        <br />
-        <Ex1 />
-        <br />
-        <Ex2 />
-    </div>,
+    <BemVindo />,
     document.querySelector("#main")
 )

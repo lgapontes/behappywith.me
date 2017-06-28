@@ -1372,7 +1372,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -2770,7 +2770,9 @@
       </g>
       <g
          id="g4693"
-         transform="matrix(0.25,0,0,0.25,-3979.5,3187.7715)">
+         transform="matrix(0.25,0,0,0.25,-3979.5,3187.7715)"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90">
         <rect
            style="opacity:0.98999999;fill:#2a7fb8;fill-opacity:1;stroke:none;stroke-width:3;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
            id="rect4357-5-9-0-5-3-5-7-1-9"
