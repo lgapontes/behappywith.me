@@ -1,19 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-
-let plugins = [
-    new HtmlWebpackPlugin({
-        filename: 'index.html',
-        template: path.join(__dirname, 'src/index.html')
-    }),
-    new ExtractTextPlugin('style.css')
-];
-if (process.env.NODE_ENV === 'production') {
-    plugins.push(new UglifyJSPlugin());
-}
 
 module.exports = {
     entry: path.join(__dirname, 'src/index.jsx'),
@@ -21,7 +8,12 @@ module.exports = {
         path: path.join(__dirname, 'dist'),
         filename: 'bundle.js'
     },
-    plugins: plugins,
+    plugins: [
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: path.join(__dirname, 'src/index.html')
+        })
+    ],
     module: {
         rules: [
         {
@@ -36,13 +28,6 @@ module.exports = {
                 }
             }
             ]
-        },
-        {
-            test: /\.css$/,
-            use: ExtractTextPlugin.extract({
-                fallback: "style-loader",
-                use: "css-loader"
-            })
         },
         {
             test: /\.(jpe?g|ico|png|gif|svg)$/i,
