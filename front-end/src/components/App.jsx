@@ -1,8 +1,9 @@
 import React from 'react';
+import NewUser from './NewUser';
 
 function App() {
     return (
-        <h1>Componente App!</h1>
+        <NewUser />
     );
 }
 

@@ -1,0 +1,44 @@
+div.header {
+    background-color: #2c80b9;
+    min-width: 400px;
+    z-index: 2;
+}
+
+div.header img {
+    display: block;
+    margin: 0;
+}
+
+div.header img.logo {
+    float: left;
+    height: 92px;
+    width: 164px;
+}
+
+div.header h4.label {
+    color: #ffffff;
+    font-weight: normal;
+    line-height: 92px;
+    float: left;
+    margin: 0px;
+}
+
+@media (max-width: 992px) {
+    div.header img.logo {
+        height: 78px;
+        width: 139px;
+    }
+    div.header h4.label {
+        line-height: 78px;
+    }
+}
+
+@media (max-width: 600px) {
+    div.header img.logo {
+        height: 62px;
+        width: 110px;
+    }
+    div.header h4.label {
+        line-height: 62px;
+    }
+}

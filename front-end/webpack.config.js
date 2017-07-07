@@ -22,10 +22,13 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 module.exports = {
-    entry: path.join(__dirname, 'src/index.jsx'),
+    entry: path.join(__dirname, 'src/index.jsx'),    
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'bundle.js'
+    },    
+    resolve: {
+        extensions: [".js",".jsx"]
     },
     plugins: plugins,
     module: {
