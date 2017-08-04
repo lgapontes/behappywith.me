@@ -5,16 +5,16 @@ class Exemplo extends React.Component {
    constructor(props) {
        super(props);       
        this.state = {
-           color: 'red',
-           count: 0
+           cor: 'red',
+           contador: 0
        };
    }
-   changeValue(e) {
-       let count = this.state.count;
-       let color = ( ++count % 2 ) == 0 ? 'red' : 'blue';
+   trocarCor(e) {
+       let contador = this.state.contador;
+       let cor = ( ++contador % 2 ) == 0 ? 'red' : 'blue';
        this.setState({
-           color: color,
-           count: count
+           cor: cor,
+           contador: contador
        });
    }
    render() {
@@ -25,15 +25,15 @@ class Exemplo extends React.Component {
        return (
            <div>
                <h1 style={style}>
-                   {this.props.text}               
+                   {this.props.texto} {this.state.contador}
                </h1>
-               <button onClick={this.changeValue.bind(this)}>Clique aqui!</button>
+               <button onClick={this.trocarCor.bind(this)}>Clique aqui!</button>
            </div>
        )
    }
 }
  
 ReactDOM.render(
-   <Exemplo text="Olá Mundo!" />,
+   <Exemplo texto="Olá Mundo!" />,
    document.querySelector("#main")
 )
