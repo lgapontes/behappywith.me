@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Exemplo no Browser</title>
+        <script src="https://unpkg.com/react@15.6.1/dist/react.js"></script>
+        <script src="https://unpkg.com/react-dom@15.6.1/dist/react-dom.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="exemplo"></div>
+        <script type="text/babel">            
+            class Exemplo extends React.Component {
+                constructor(props) {
+                    super(props);       
+                    this.state = {
+                        cor: 'red',
+                        contador: 0
+                    };
+                }
+                trocarCor(e) {
+                    let contador = this.state.contador;
+                    let cor = ( ++contador % 2 ) == 0 ? 'red' : 'blue';
+                    this.setState({
+                        cor: cor,
+                        contador: contador
+                    });
+                }
+                render() {
+                    const estilo = {
+                        padding: 10,
+                        background: this.state.cor
+                    }
+                    return (
+                        <h1
+                            style={estilo}
+                            onClick={this.trocarCor.bind(this)}
+                        >
+                            {this.props.texto}
+                        </h1>
+                    )
+                }
+            }
+            
+            ReactDOM.render(
+                <Exemplo texto="Olá Mundo!" />,
+                document.querySelector("#exemplo")
+            )
+        </script>
+    </body>
+</html>
