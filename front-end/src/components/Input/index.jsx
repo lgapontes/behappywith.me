@@ -1,39 +1,19 @@
 import React from 'react'
 
-class Input extends React.Component {
-    constructor(props) {
-        super(props);        
-        this.state = {
-            value: props.value
-        }
-    }
+export default function Input(props) {
+    const estilo = {
+        borderColor: props.valorInvalido ? '#d50000' : '#cccccc',
+        backgroundColor: props.valorInvalido ? '#ffcdd2' : '#ffffff'
+    };
 
-    atualizar(e) {
-        this.setState({
-            value: e.target.value
-        });
-    }
+    let propriedades = Object.assign({},props);
+    delete propriedades.valorInvalido;
 
-    render() {        
-        const estilo = {
-            borderColor: this.props.valorInvalido ? '#d50000' : '#cccccc',
-            backgroundColor: this.props.valorInvalido ? '#ffcdd2' : '#ffffff'
-        };
-
-        let propriedades = Object.assign({},this.props);
-        delete propriedades.valorInvalido;
-        delete propriedades.value;
-
-        return (
-            <input
-                type="text"
-                style={estilo}
-                value={this.state.value}
-                onChange={this.atualizar.bind(this)}
-                {...propriedades}
-            />
-        )
-    }
+    return (
+        <input
+            type="text"
+            style={estilo}
+            {...propriedades}
+        />
+    )
 }
-
-export default Input;

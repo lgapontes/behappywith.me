@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Exemplo no Browser</title>
+        <script src="https://unpkg.com/react@15.6.1/dist/react.js"></script>
+        <script src="https://unpkg.com/react-dom@15.6.1/dist/react-dom.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="exemplo"></div>
+        <script type="text/babel">
+            // Codigo nativo do React
+            var ExemploNativo = React.createClass({
+                render: function() {
+                    return React.DOM.div(null,
+                        React.DOM.h3(null, 'Ex h3'),
+                        React.DOM.span(null, 'Ex span')
+                    );
+                }
+            });
+
+            // Componente com JSX
+            class ExemploJSX extends React.Component {
+                render() {
+                    return (
+                        <div>
+                            <h3>Ex h3</h3>
+                            <span>Ex span</span>
+                        </div>
+                    )
+                }
+            }
+
+            ReactDOM.render(
+                <div>
+                    <ExemploNativo />
+                    <ExemploJSX />
+                </div>,
+                document.querySelector("#exemplo")
+            )
+        </script>
+    </body>
+</html>
