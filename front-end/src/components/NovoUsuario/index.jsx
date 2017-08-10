@@ -1,16 +1,19 @@
 import React from 'react'
 import Label from '../Label'
 import Input from '../Input'
+import DivSelector from '../DivSelector'
 
 class NovoUsuario extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             usuario: {
-                nome: ''
+                nome: '',
+                genero: ''
             },
             validacao: {
-                nomeInvalido: false
+                nomeInvalido: false,
+                generoInvalido: false
             }            
         };
     }
@@ -19,6 +22,13 @@ class NovoUsuario extends React.Component {
         this.setState({
             usuario: {
                 nome: e.target.value
+            }
+        });
+    }
+    atualizarGenero(genero) {       
+        this.setState({
+            usuario: {
+                genero: genero
             }
         });
     }
@@ -40,6 +50,16 @@ class NovoUsuario extends React.Component {
                         valorInvalido={this.state.validacao.nomeInvalido}
                         defaultValue={this.state.usuario.nome}
                         onChange={this.atualizarNome.bind(this)}
+                    />
+                    <Label
+                        htmlFor="genero"
+                        texto="Seu gênero:"
+                        valorInvalido={this.state.validacao.generoInvalido}
+                    />
+                    <DivSelector
+                        valorInvalido={this.state.validacao.generoInvalido}
+                        genero={this.state.usuario.genero}
+                        atualizar={this.atualizarGenero.bind(this)}
                     />
                 </form>
             </div>

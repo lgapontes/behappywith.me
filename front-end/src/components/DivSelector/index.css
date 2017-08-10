@@ -1,0 +1,10 @@
+div.div-selector {
+    box-sizing: border-box;    
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    float: left;
+}
+
+div.div-selector-invalido {    
+    border: 1px solid #d50000;
+}

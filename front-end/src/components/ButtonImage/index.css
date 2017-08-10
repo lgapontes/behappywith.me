@@ -1,0 +1,20 @@
+a.button-image {
+    box-sizing: border-box;    
+    width: 180px;
+    height: 180px;    
+    border-radius: 10px;
+    margin: 3px;
+    float: left;
+}
+
+a.button-image:hover {        
+    background-color: #bdbdbd;
+}
+
+a.button-image-selecionado {        
+    background-color: #00C853;
+}
+
+a.button-image-selecionado:hover {      
+    background-color: #00C853;
+}
