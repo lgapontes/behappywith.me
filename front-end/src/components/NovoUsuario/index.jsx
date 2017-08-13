@@ -6,6 +6,7 @@ import DivSelector from '../DivSelector'
 class NovoUsuario extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
             usuario: {
                 nome: '',
@@ -19,21 +20,21 @@ class NovoUsuario extends React.Component {
     }
 
     atualizarNome(e) {
+        let usuario = this.state.usuario;
+        usuario.nome = e.target.value;        
         this.setState({
-            usuario: {
-                nome: e.target.value
-            }
+            usuario: usuario
         });
     }
-    atualizarGenero(genero) {       
+    atualizarGenero(genero) {
+        let usuario = this.state.usuario;
+        usuario.genero = genero;
         this.setState({
-            usuario: {
-                genero: genero
-            }
+            usuario: usuario
         });
     }
 
-    render() {
+    render() {        
         return (            
             <div className="center">
                 <form className="pure-form pure-form-stacked">

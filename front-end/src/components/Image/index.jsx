@@ -1,22 +1,39 @@
 import React from 'react'
-import './avatars.png'
 
-export default function Image(props) {
-    const eixoX = props.codigo * 170 + 'px';
-    const eixoY = props.genero === 'm' ? '0px' : '170px';
+ class Image extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
-    const estilo = {
-        backgroundImage: 'url(img/avatars.png)',
-        backgroundPositionX: eixoX,
-        backgroundPositionY: eixoY,
-        width: '170px',
-        height: '170px',
-        display: 'table',
-        margin: '5px auto',        
-    };
+    calcularPosicaoX() {
+        return `${this.props.eixoX * this.props.width}px`
+    }
+    calcularPosicaoY() {
+        return `${this.props.eixoY * this.props.height}px`
+    }
+    calcularTamanho() {        
+        return `auto ${this.props.backgroundHeight}px`
+    }
 
-    return (
-        <div style={estilo}>
-        </div>
-    )
+    obterEstilo() {        
+        return {
+            backgroundImage: `url(${this.props.arquivo})`,
+            backgroundPositionX: this.calcularPosicaoX(),
+            backgroundPositionY: this.calcularPosicaoY(),
+            backgroundSize: this.calcularTamanho(),            
+            width: this.props.width + 'px',
+            height: this.props.height + 'px',
+            display: 'table',
+            margin: '0 auto'
+        }        
+    }
+
+    render() {
+        return (
+            <div style={this.obterEstilo()}>
+            </div>
+        )
+    }    
 }
+
+export default Image;

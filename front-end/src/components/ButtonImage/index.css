@@ -5,6 +5,7 @@ a.button-image {
     border-radius: 10px;
     margin: 3px;
     float: left;
+    padding-top: 5px
 }
 
 a.button-image:hover {        
