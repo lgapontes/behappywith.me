@@ -60,7 +60,7 @@ class NovoUsuario extends React.Component {
                     <GenderSelector
                         valorInvalido={this.state.validacao.generoInvalido}
                         genero={this.state.usuario.genero}
-                        atualizar={this.atualizarGenero.bind(this)}
+                        atualizarGenero={this.atualizarGenero.bind(this)}
                     />
                 </form>
             </div>

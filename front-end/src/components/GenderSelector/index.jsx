@@ -18,13 +18,13 @@ export default function GenderSelector(props) {
                 selecionado={masculino}
                 codigo={0}
                 genero={'m'}
-                atualizar={props.atualizar}
+                atualizarGenero={props.atualizarGenero}
             />
             <GenderButton
                 selecionado={feminino}
                 codigo={0}
                 genero={'f'}
-                atualizar={props.atualizar}
+                atualizarGenero={props.atualizarGenero}
             />
         </div>
     )

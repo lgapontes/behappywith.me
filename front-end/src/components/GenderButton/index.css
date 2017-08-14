@@ -12,10 +12,10 @@ a.gender-button:hover {
     background-color: #bdbdbd;
 }
 
-a.gender-button-selecionado {        
+a.selected-gender-button {        
     background-color: #00C853;
 }
 
-a.gender-button-selecionado:hover {      
+a.selected-gender-button:hover {      
     background-color: #00C853;
 }
