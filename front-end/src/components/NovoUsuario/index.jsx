@@ -1,7 +1,7 @@
 import React from 'react'
 import Label from '../Label'
 import Input from '../Input'
-import DivSelector from '../DivSelector'
+import GenderSelector from '../GenderSelector'
 
 class NovoUsuario extends React.Component {
     constructor(props) {
@@ -42,7 +42,7 @@ class NovoUsuario extends React.Component {
                         htmlFor="nome"
                         texto="Quem é você?"
                         valorInvalido={this.state.validacao.nomeInvalido}
-                    />
+                    />                    
                     <Input
                         id="nome"
                         placeholder="Digite seu nome"
@@ -57,7 +57,7 @@ class NovoUsuario extends React.Component {
                         texto="Seu gênero:"
                         valorInvalido={this.state.validacao.generoInvalido}
                     />
-                    <DivSelector
+                    <GenderSelector
                         valorInvalido={this.state.validacao.generoInvalido}
                         genero={this.state.usuario.genero}
                         atualizar={this.atualizarGenero.bind(this)}

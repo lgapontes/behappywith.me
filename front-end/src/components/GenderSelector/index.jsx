@@ -1,8 +1,8 @@
 import React from 'react'
 import './index.css'
-import ButtonImage from '../ButtonImage'
+import GenderButton from '../GenderButton'
 
-export default function DivSelector(props) {
+export default function GenderSelector(props) {
     const masculino = props.genero==='m';
     const feminino = props.genero==='f';
 
@@ -10,17 +10,17 @@ export default function DivSelector(props) {
         <div
             className={
                 props.valorInvalido ?
-                'div-selector div-selector-invalido' :
-                'div-selector'
+                'gender-selector gender-selector-invalido' :
+                'gender-selector'
             }
         >
-            <ButtonImage
+            <GenderButton
                 selecionado={masculino}
                 codigo={0}
                 genero={'m'}
                 atualizar={props.atualizar}
             />
-            <ButtonImage
+            <GenderButton
                 selecionado={feminino}
                 codigo={0}
                 genero={'f'}

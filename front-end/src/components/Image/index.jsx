@@ -1,6 +1,6 @@
 import React from 'react'
 
- class Image extends React.Component {
+class Image extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -21,8 +21,8 @@ import React from 'react'
             backgroundPositionX: this.calcularPosicaoX(),
             backgroundPositionY: this.calcularPosicaoY(),
             backgroundSize: this.calcularTamanho(),            
-            width: this.props.width + 'px',
-            height: this.props.height + 'px',
+            width: `${this.props.width}px`,
+            height: `${this.props.height}px`,
             display: 'table',
             margin: '0 auto'
         }        

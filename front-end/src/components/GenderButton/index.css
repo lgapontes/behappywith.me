@@ -1,4 +1,4 @@
-a.button-image {
+a.gender-button {
     box-sizing: border-box;    
     width: 180px;
     height: 180px;    
@@ -8,14 +8,14 @@ a.button-image {
     padding-top: 5px
 }
 
-a.button-image:hover {        
+a.gender-button:hover {        
     background-color: #bdbdbd;
 }
 
-a.button-image-selecionado {        
+a.gender-button-selecionado {        
     background-color: #00C853;
 }
 
-a.button-image-selecionado:hover {      
+a.gender-button-selecionado:hover {      
     background-color: #00C853;
 }
