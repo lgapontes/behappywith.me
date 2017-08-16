@@ -15,7 +15,7 @@ class NovoUsuario extends React.Component {
             validacao: {
                 nomeInvalido: false,
                 generoInvalido: false
-            }            
+            }
         };
     }
 
@@ -26,7 +26,8 @@ class NovoUsuario extends React.Component {
             usuario: usuario
         });
     }
-    atualizarGenero(genero) {
+    atualizarGenero(e,genero) {
+        e.preventDefault();
         let usuario = this.state.usuario;
         usuario.genero = genero;
         this.setState({
@@ -53,7 +54,6 @@ class NovoUsuario extends React.Component {
                         onChange={this.atualizarNome.bind(this)}
                     />
                     <Label
-                        htmlFor="genero"
                         texto="Seu gênero:"
                         valorInvalido={this.state.validacao.generoInvalido}
                     />

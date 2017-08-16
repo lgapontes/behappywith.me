@@ -11,7 +11,7 @@ export default function GenderButton(props) {
                 "gender-button"
             }
             href="#!"
-            onClick={e => props.atualizarGenero(props.genero)}
+            onClick={e => props.atualizarGenero(e,props.genero)}
         >
             <GenderImage
                 genero={props.genero}

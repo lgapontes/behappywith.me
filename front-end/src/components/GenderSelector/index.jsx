@@ -1,28 +1,27 @@
 import React from 'react'
-import './index.css'
 import GenderButton from '../GenderButton'
 
 export default function GenderSelector(props) {
     const masculino = props.genero==='m';
     const feminino = props.genero==='f';
 
+    const cor = props.valorInvalido ? '#d50000' : '#cccccc';
+    const estilo = {
+        boxSizing: 'border-box',
+        border: `1px solid ${cor}`,
+        borderRadius: '5px',
+        float: 'left'
+    };
+
     return (
-        <div
-            className={
-                props.valorInvalido ?
-                'gender-selector gender-selector-invalido' :
-                'gender-selector'
-            }
-        >
+        <div style={estilo}>
             <GenderButton
-                selecionado={masculino}
-                codigo={0}
+                selecionado={masculino}                
                 genero={'m'}
                 atualizarGenero={props.atualizarGenero}
             />
             <GenderButton
-                selecionado={feminino}
-                codigo={0}
+                selecionado={feminino}                
                 genero={'f'}
                 atualizarGenero={props.atualizarGenero}
             />
