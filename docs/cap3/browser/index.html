@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Exemplo no Browser</title>
+        <script src="https://unpkg.com/react@15.6.1/dist/react.js"></script>
+        <script src="https://unpkg.com/react-dom@15.6.1/dist/react-dom.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="exemplo"></div>
+        <script type="text/babel">
+            class OlaReact extends React.Component {
+                render() {
+                    return <h1>Olá React!!!</h1>
+                }
+            }
+
+            ReactDOM.render(
+                <OlaReact />,
+                document.querySelector("#exemplo")
+            );
+        </script>
+    </body>
+</html>
