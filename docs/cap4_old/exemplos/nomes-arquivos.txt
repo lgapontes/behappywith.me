@@ -1,1 +1,0 @@
-PascalCase: ReservationCard.jsx.

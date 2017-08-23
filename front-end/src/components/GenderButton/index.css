@@ -3,9 +3,9 @@ a.gender-button {
     width: 180px;
     height: 180px;    
     border-radius: 10px;
-    margin: 3px;
-    float: left;
-    padding-top: 5px
+    margin: 3px;    
+    padding-top: 5px;
+    display: inline-block;
 }
 
 a.gender-button:hover {        
