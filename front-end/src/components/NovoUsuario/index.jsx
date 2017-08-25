@@ -4,6 +4,7 @@ import Input from '../Input'
 import GenderSelector from '../GenderSelector'
 import Usuario from '../../models/Usuario'
 import Button from '../Button'
+import Toast from '../Toast'
 
 class NovoUsuario extends React.Component {
     constructor(props) {
@@ -52,7 +53,9 @@ class NovoUsuario extends React.Component {
         } else {
             primeiraVisaoCompleta = true;
         }
-        console.log(mensagem);
+        if (!primeiraVisaoCompleta) {
+            this.refs.toast.exibir(mensagem);
+        }
 
         this.setState({
             validacao: validacao,
@@ -137,6 +140,7 @@ class NovoUsuario extends React.Component {
                     {this.renderizarNome()}
                     {this.renderizarGenero()}
                     {this.renderizarBotoes()}
+                    <Toast erro ref="toast" />
                 </form>
             </div>
         );
