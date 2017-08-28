@@ -1,5 +1,6 @@
 import React from 'react'
 import './img/avatars.png'
+import './img/botoes.png'
 
 class Image extends React.Component {
     constructor(props) {
@@ -7,10 +8,10 @@ class Image extends React.Component {
     }
 
     calcularPosicaoX() {
-        return `${this.props.eixoX * this.props.width}px`
+        return `${this.props.eixoX * this.props.width * (-1)}px`
     }
     calcularPosicaoY() {
-        return `${this.props.eixoY * this.props.height}px`
+        return `${this.props.eixoY * this.props.height * (-1)}px`
     }
     calcularTamanho() {        
         return `auto ${this.props.backgroundHeight}px`

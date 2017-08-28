@@ -1,0 +1,12 @@
+/* Tipo: Image Scroller */
+div.option-image-scroller {
+    border-radius: 50%;    
+    padding: 4px;
+    background-color: #bdbdbd;
+    z-index: 1;
+    margin-top: 75px;
+}
+
+div.option-image-scroller:hover {
+    background-color: #8d8d8d;
+}

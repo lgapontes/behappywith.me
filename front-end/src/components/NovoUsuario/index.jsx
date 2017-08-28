@@ -5,6 +5,7 @@ import GenderSelector from '../GenderSelector'
 import Usuario from '../../models/Usuario'
 import Button from '../Button'
 import Toast from '../Toast'
+import ImageSelector from '../ImageSelector'
 
 class NovoUsuario extends React.Component {
     constructor(props) {
@@ -14,9 +15,10 @@ class NovoUsuario extends React.Component {
             usuario: new Usuario(),
             validacao: {
                 nomeInvalido: false,
-                generoInvalido: false
+                generoInvalido: false,
+                avatarInvalido: false
             },
-            primeiraVisaoCompleta: false
+            primeiraVisaoCompleta: true
         };
     }
 
@@ -104,6 +106,22 @@ class NovoUsuario extends React.Component {
         }
     }
 
+    renderizarAvatar() {
+        if (this.state.primeiraVisaoCompleta) {
+            return (
+                <section>
+                    <Label
+                        texto="Escolha seu avatar:"
+                        valorInvalido={this.state.validacao.avatarInvalido}
+                    />
+                    <ImageSelector />
+                </section>
+            )
+        } else {
+            return null            
+        }
+    }
+
     renderizarBotoes() {
         if (this.state.primeiraVisaoCompleta) {
             return (
@@ -139,6 +157,7 @@ class NovoUsuario extends React.Component {
                 <form className="pure-form pure-form-stacked">
                     {this.renderizarNome()}
                     {this.renderizarGenero()}
+                    {this.renderizarAvatar()}
                     {this.renderizarBotoes()}
                     <Toast erro ref="toast" />
                 </form>
