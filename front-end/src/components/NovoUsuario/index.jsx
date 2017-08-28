@@ -114,7 +114,10 @@ class NovoUsuario extends React.Component {
                         texto="Escolha seu avatar:"
                         valorInvalido={this.state.validacao.avatarInvalido}
                     />
-                    <ImageSelector />
+                    <ImageSelector                    
+                        arquivo="img/avatars.png"
+                        elementos={22}
+                    />
                 </section>
             )
         } else {

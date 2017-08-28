@@ -4,7 +4,7 @@ div.option-image-scroller {
     padding: 4px;
     background-color: #bdbdbd;
     z-index: 1;
-    margin-top: 75px;
+    margin: 75px 3px 0 3px;
 }
 
 div.option-image-scroller:hover {

@@ -27,7 +27,7 @@ class Image extends React.Component {
             height: `${this.props.height}px`,
             display: 'table',
             margin: '0 auto'
-        }        
+        }
     }
 
     render() {
