@@ -2,10 +2,6 @@ import React from 'react'
 import Image from '../Image'
 import ButtonImage from '../ButtonImage'
 
-import './slick/slick.css'
-import './slick/slick-theme.css'
-import './slick/slick.min.js'
-
 class ImageSelector extends React.Component {
     constructor(props) {
         super(props)
@@ -19,29 +15,19 @@ class ImageSelector extends React.Component {
             />
         )
     }
-    renderizarImagens() {
-        const ul = {
-            listStyleType: 'none',
-            margin: '0',
-            padding: '0'
-        }
-        const li = {
-            marginTop: '10px',
-            position: 'absolute',
-            zIndex: '-1'
-        }
 
-        const elementos = Array.from(
-            new Array(this.props.elementos), (x,i) => i
-        );
-        const lista = elementos.map((index) =>
+    renderizarImagem(index) {
+        return (
             <li style={{
-                marginTop: '10px',
+                paddingTop: '10px',
+                paddingBottom: '13px',
                 position: 'absolute',
                 zIndex: '-1',
-                marginLeft: `${index * 170}px`
-            }} key={index}>                    
-                <Image
+                marginLeft: `${index * 170}px`,
+                backgroundColor: (index == this.props.selecionado) ?
+                    'rgba(0, 200, 83, 0.3)' : 'none'
+            }} key={index}>
+                <Image                    
                     eixoX={index}
                     eixoY={0}
                     width={170}
@@ -50,6 +36,21 @@ class ImageSelector extends React.Component {
                     arquivo={this.props.arquivo}
                 />
             </li>
+        )   
+    }
+
+    renderizarImagens() {
+        const ul = {
+            listStyleType: 'none',
+            margin: '0',
+            padding: '0',
+            position: 'relative',
+            width: '3910px',
+            left: '105px'
+        }
+
+        const lista = this.props.elementos.map(
+            (index) => this.renderizarImagem(index)
         );
 
         return (
@@ -57,17 +58,6 @@ class ImageSelector extends React.Component {
                 {lista}
             </ul>
         )
-    }
-    renderizarSpan() {
-        const estiloSpan = {
-            backgroundColor: 'rgba(189, 189, 189, 0.3)',
-            height: '193px',
-            width: '180px',
-            float: 'left',
-            marginLeft: '55px',
-            zIndex: '1'
-        }
-        return <span style={estiloSpan}></span>
     }
 
     render() {
@@ -77,23 +67,17 @@ class ImageSelector extends React.Component {
             border: `1px solid ${cor}`,
             borderRadius: '5px',        
             width: '380px',
-            height: '195px'
+            height: '195px',
+            overflow: 'hidden'
         };
-        
-        return (
-            null
-        )
-
-        /*
+                
         return (
             <div style={estiloDiv}>
                 {this.renderizarButtonImage('esquerda')}
-                {this.renderizarImagens()}
-                {this.renderizarSpan()}
+                {this.renderizarImagens()}                
                 {this.renderizarButtonImage('direita')}
             </div>
         )
-        */
     }
 }
 

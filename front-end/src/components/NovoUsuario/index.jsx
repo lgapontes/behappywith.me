@@ -116,7 +116,8 @@ class NovoUsuario extends React.Component {
                     />
                     <ImageSelector                    
                         arquivo="img/avatars.png"
-                        elementos={22}
+                        elementos={Array.from(new Array(22), (x,i) => i)}
+                        selecionado={0}
                     />
                 </section>
             )
