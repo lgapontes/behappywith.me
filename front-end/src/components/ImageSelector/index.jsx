@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from '../Image'
 import ButtonImage from '../ButtonImage'
-import HandleEvent from './HandleEvent'
+import ManipularEvento from './ManipularEvento'
 
 class ImageSelector extends React.Component {
     constructor(props) {
@@ -9,7 +9,7 @@ class ImageSelector extends React.Component {
         this.onClick = false;        
 
         this.state = {
-            handleEvent: new HandleEvent(
+            manipularEvento: new ManipularEvento(
                 -3465,
                 105,                
                 170,
@@ -28,16 +28,16 @@ class ImageSelector extends React.Component {
                 onMouseDown={e => {                    
                     this.onClick = true;
                     e.preventDefault();
-                    let handle = this.state.handleEvent;
-                    let index = handle.index;
+                    let manipularEvento = this.state.manipularEvento;
+                    let index = manipularEvento.index;
                     if (posicao == 'esquerda') {
                         index += -1;
                     } else {
                         index += 1;
                     }
-                    handle.setIndex(index);
-                    handle.end();
-                    this.setState({ handleEvent: handle });
+                    manipularEvento.definirIndex(index);
+                    manipularEvento.atualizar();
+                    this.setState({ manipularEvento: manipularEvento });
                 }}
                 onMouseUp={e => {                    
                     this.onClick = false;
@@ -83,7 +83,7 @@ class ImageSelector extends React.Component {
     }
 
     renderizarImagens() {
-        const ms = this.state.handleEvent.beingTouched
+        const ms = this.state.manipularEvento.toqueEmExecucao
             ? '100ms' : '800ms'
 
         const ul = {
@@ -95,7 +95,7 @@ class ImageSelector extends React.Component {
             padding: '0',
             position: 'relative',
             width: '3910px',
-            left: `${this.state.handleEvent.left}px`
+            left: `${this.state.manipularEvento.left}px`
         }
 
         const lista = this.props.elementos.map(
@@ -115,23 +115,23 @@ class ImageSelector extends React.Component {
             e.stopPropagation()
             return;
         }        
-        let handle = this.state.handleEvent;
-        handle.start(clientX);
-        this.setState({ handleEvent: handle });
+        let manipularEvento = this.state.manipularEvento;
+        manipularEvento.iniciar(clientX);
+        this.setState({ manipularEvento: manipularEvento });
     }
     handleMove(e,clientX) {
         if (this.onClick) {
             e.stopPropagation()
             return;
         }        
-        let handle = this.state.handleEvent;
-        handle.move(clientX);
-        this.setState({ handleEvent: handle });
+        let manipularEvento = this.state.manipularEvento;
+        manipularEvento.mover(clientX);
+        this.setState({ manipularEvento: manipularEvento });
     }
     handleEnd() {        
-        let handle = this.state.handleEvent;
-        handle.end();
-        this.setState({ handleEvent: handle });
+        let manipularEvento = this.state.manipularEvento;
+        manipularEvento.atualizar();
+        this.setState({ manipularEvento: manipularEvento });
     }
 
     onTouchStart(e) {
@@ -144,23 +144,7 @@ class ImageSelector extends React.Component {
     }
     onTouchEnd() { 
         this.handleEnd();
-    }
-    /*
-    onMouseDown(e) {        
-        e.preventDefault();
-        this.handleStart(e,e.clientX);
-    }
-    onMouseMove(e) {
-        e.preventDefault();        
-        this.handleMove(e,e.clientX);
-    }
-    onMouseUp() {
-        this.handleEnd();
-    }
-    onMouseLeave() {
-        this.handleEnd();
-    }
-    */   
+    }  
 
     render() {
         const cor = this.props.valorInvalido ? '#d50000' : '#cccccc';
