@@ -2,9 +2,10 @@ import React from 'react'
 import './index.css'
 import IconImage from '../IconImage'
 
-export default function Option(props) {
+export default function ButtonImage(props) {
+
     let classe = ''
-    let  estilo = {}
+    let estilo = {}
     let pequeno = false
     let index = props.index
 
@@ -21,8 +22,17 @@ export default function Option(props) {
         }
     }
 
+    let propriedades = Object.assign({},props);
+    delete propriedades.index;
+    delete propriedades.tipo;
+    delete propriedades.posicao;
+
     return (
-        <div style={estilo} className={classe} onClick={props.onClick}>
+        <div
+            style={estilo}
+            className={classe}
+            {...propriedades}
+        >
             <IconImage pequeno={pequeno} index={index} />
         </div>
     )

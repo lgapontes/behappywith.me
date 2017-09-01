@@ -6,26 +6,41 @@ import HandleEvent from './HandleEvent'
 class ImageSelector extends React.Component {
     constructor(props) {
         super(props)
+        this.onClick = false;        
+
         this.state = {
             handleEvent: new HandleEvent(
                 -3465,
                 105,                
                 170,
-                this.props.selecionado
+                this.props.selecionado,
+                0,
+                this.props.elementos.length
             )
         }
     }
 
     renderizarButtonImage(posicao) {
         return (
-            <ButtonImage                
-                tipo='image-scroller'
-                posicao={posicao}
-                onClick={e => {
-                    e.preventDefault();                                        
+            <ButtonImage
+                tipo='image-scroller'                
+                posicao={posicao}                
+                onMouseDown={e => {                    
+                    this.onClick = true;
+                    e.preventDefault();
                     let handle = this.state.handleEvent;
-                    handle.index += (posicao == 'esquerda') ? -1 : 1;                    
+                    let index = handle.index;
+                    if (posicao == 'esquerda') {
+                        index += -1;
+                    } else {
+                        index += 1;
+                    }
+                    handle.setIndex(index);
+                    handle.end();
                     this.setState({ handleEvent: handle });
+                }}
+                onMouseUp={e => {                    
+                    this.onClick = false;
                 }}
             />
         )
@@ -47,7 +62,7 @@ class ImageSelector extends React.Component {
         )
     }
 
-    renderizarImagem(index) {        
+    renderizarImagem(index) {
         return (
             <li style={{
                 paddingTop: '10px',
@@ -94,43 +109,58 @@ class ImageSelector extends React.Component {
         )
     }
 
-    onTouchStart(e) {
-        e.preventDefault();
+
+    handleStart(e,clientX) {
+        if (this.onClick) {
+            e.stopPropagation()
+            return;
+        }        
         let handle = this.state.handleEvent;
-        handle.start(e.targetTouches[0].clientX);
+        handle.start(clientX);
         this.setState({ handleEvent: handle });
     }
-    onTouchMove(e) {       
-        e.preventDefault();
+    handleMove(e,clientX) {
+        if (this.onClick) {
+            e.stopPropagation()
+            return;
+        }        
         let handle = this.state.handleEvent;
-        handle.move(e.targetTouches[0].clientX);
+        handle.move(clientX);
         this.setState({ handleEvent: handle });
     }
-    onTouchEnd() {
-        let handle = this.state.handleEvent;
-        handle.end();        
-        this.setState({ handleEvent: handle });
-    }
-    onMouseDown(e) {        
-        e.preventDefault();        
-        let handle = this.state.handleEvent;
-        handle.start(e.clientX);
-        this.setState({ handleEvent: handle });
-    }
-    onMouseMove(e) {
-        e.preventDefault();
-        let handle = this.state.handleEvent;
-        handle.move(e.clientX);
-        this.setState({ handleEvent: handle });
-    }
-    onMouseUp(e) {        
+    handleEnd() {        
         let handle = this.state.handleEvent;
         handle.end();
         this.setState({ handleEvent: handle });
     }
+
+    onTouchStart(e) {
+        e.preventDefault();
+        this.handleStart(e,e.targetTouches[0].clientX);        
+    }
+    onTouchMove(e) {
+        e.preventDefault();
+        this.handleMove(e,e.targetTouches[0].clientX);
+    }
+    onTouchEnd() { 
+        this.handleEnd();
+    }
+    /*
+    onMouseDown(e) {        
+        e.preventDefault();
+        this.handleStart(e,e.clientX);
+    }
+    onMouseMove(e) {
+        e.preventDefault();        
+        this.handleMove(e,e.clientX);
+    }
+    onMouseUp() {
+        this.handleEnd();
+    }
     onMouseLeave() {
-        this.onMouseUp();
-    }    
+        this.handleEnd();
+    }
+    */   
 
     render() {
         const cor = this.props.valorInvalido ? '#d50000' : '#cccccc';
@@ -149,11 +179,8 @@ class ImageSelector extends React.Component {
                 onTouchStart={this.onTouchStart.bind(this)}
                 onTouchMove={this.onTouchMove.bind(this)}
                 onTouchEnd={this.onTouchEnd.bind(this)}
-                onMouseDown={this.onMouseDown.bind(this)}
-                onMouseMove={this.onMouseMove.bind(this)}
-                onMouseUp={this.onMouseUp.bind(this)}
-                onMouseLeave={this.onMouseLeave.bind(this)}
-            >
+                
+            >                
                 {this.renderizarButtonImage('esquerda')}
                 {this.renderizarSelecionado()}
                 {this.renderizarImagens()}
