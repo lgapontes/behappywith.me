@@ -2,7 +2,7 @@ class Usuario {
     constructor() {
         this.nome = ''
         this.genero = ''
-        this.avatar = undefined
+        this.avatar = 0
     }
 
     validarNome() {

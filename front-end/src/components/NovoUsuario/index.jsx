@@ -3,6 +3,7 @@ import Label from '../Label'
 import Input from '../Input'
 import GenderSelector from '../GenderSelector'
 import Usuario from '../../models/Usuario'
+import Listas from '../../models/Listas'
 import Button from '../Button'
 import Toast from '../Toast'
 import ImageSelector from '../ImageSelector'
@@ -15,10 +16,9 @@ class NovoUsuario extends React.Component {
             usuario: new Usuario(),
             validacao: {
                 nomeInvalido: false,
-                generoInvalido: false,
-                avatarInvalido: false
+                generoInvalido: false
             },
-            primeiraVisaoCompleta: true
+            primeiraVisaoCompleta: false
         };
     }
 
@@ -39,7 +39,7 @@ class NovoUsuario extends React.Component {
     }
     primeiraValidacao(e) {
         e.preventDefault();
-        let usuario = this.state.usuario;            
+        let usuario = this.state.usuario;
         let validacao = this.state.validacao;        
         validacao.nomeInvalido = ! usuario.validarNome();
         validacao.generoInvalido = ! usuario.validarGenero();        
@@ -62,6 +62,12 @@ class NovoUsuario extends React.Component {
         this.setState({
             validacao: validacao,
             primeiraVisaoCompleta: primeiraVisaoCompleta
+        });
+    }
+    voltar(e) {
+        e.preventDefault();
+        this.setState({            
+            primeiraVisaoCompleta: false
         });
     }
 
@@ -107,7 +113,7 @@ class NovoUsuario extends React.Component {
     }
 
     renderizarAvatar() {
-        if (this.state.primeiraVisaoCompleta) {
+        if (this.state.primeiraVisaoCompleta) {    
             return (
                 <section>
                     <Label
@@ -116,8 +122,16 @@ class NovoUsuario extends React.Component {
                     />
                     <ImageSelector                    
                         arquivo="img/avatars.png"
-                        elementos={Array.from(new Array(22), (x,i) => i)}
-                        selecionado={0}
+                        eixoY={(this.state.usuario.genero == 'm' ? 0 : 1)}
+                        elementos={Listas.avatares}
+                        selecionado={this.state.usuario.avatar}
+                        onChange={avatar => {                            
+                            let usuario = this.state.usuario;
+                            usuario.avatar = avatar;                            
+                            this.setState({                                
+                                usuario: usuario                                
+                            });
+                        }}
                     />
                 </section>
             )
@@ -132,13 +146,15 @@ class NovoUsuario extends React.Component {
                 <section>
                     <Button
                         texto="Voltar"
-                        onClick={e => this.setState({
-                            primeiraVisaoCompleta: false
-                        }) }
+                        onClick={this.voltar.bind(this)}
                     />
                     <Button
                         principal
                         texto="Salvar"
+                        onClick={e => {
+                            e.preventDefault()
+                            console.log(this.state.usuario)
+                        }}
                     />
                 </section>
             )

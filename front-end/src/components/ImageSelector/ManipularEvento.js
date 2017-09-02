@@ -9,8 +9,7 @@ class ManipularEvento {
         this.direcao = 0;
 
         this.left = maxLeft;
-        this.deslocamento = 0;
-        //this.ultimaMarcacao = 0;
+        this.deslocamento = 0;        
         this.toqueInicial = 0;
         this.toqueAnterior = 0;
         this.toqueEmExecucao = false;
@@ -24,7 +23,6 @@ class ManipularEvento {
     
     iniciar(x) {                
         this.deslocamento = this.left;        
-        //this.ultimaMarcacao = Date.now();
         this.toqueInicial = x;
         this.toqueEmExecucao = true;
     }
@@ -32,13 +30,10 @@ class ManipularEvento {
     mover(x) {
         if (this.toqueEmExecucao) {
             const toqueX = x;
-            //const marcacao = Date.now();
-            //const elapsed = marcacao - this.ultimaMarcacao;            
-            this.swipe(toqueX);            
+            this.swipe(toqueX);
             this.flinging(toqueX);
-            this.calcularDirecao(toqueX);            
-            //this.ultimaMarcacao = marcacao;
-            this.toqueAnterior = toqueX;            
+            this.calcularDirecao(toqueX);
+            this.toqueAnterior = toqueX;
         }
     }
         
@@ -67,13 +62,13 @@ class ManipularEvento {
             )
         );
 
-        let diff = toqueX - this.toqueAnterior;
-        let size = Math.abs(diff);
+        let diferenca = toqueX - this.toqueAnterior;
+        let comprimento = Math.abs(diferenca);
         
         let bonus = 0;
-        if (size < this.comprimentoItem) {
+        if (comprimento < this.comprimentoItem) {
             
-            if (diff < 0) {
+            if (diferenca < 0) {
                 bonus = 1;
             } else {
                 bonus = -1;

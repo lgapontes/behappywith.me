@@ -8,11 +8,18 @@ class ImageSelector extends React.Component {
         super(props)
         this.onClick = false;        
 
+        let comprimento = 170;
+        let maxLeft = 105;
+        let minLeft = (
+            (this.props.elementos.length - 1) *
+            comprimento * (-1)
+        ) + maxLeft;
+
         this.state = {
             manipularEvento: new ManipularEvento(
-                -3465,
-                105,                
-                170,
+                minLeft,
+                maxLeft,
+                comprimento,
                 this.props.selecionado,
                 0,
                 this.props.elementos.length
@@ -24,9 +31,11 @@ class ImageSelector extends React.Component {
         return (
             <ButtonImage
                 tipo='image-scroller'                
-                posicao={posicao}                
-                onMouseDown={e => {                    
+                posicao={posicao}
+                onTouchStart={e => {
                     this.onClick = true;
+                }}
+                onClick={e => {
                     e.preventDefault();
                     let manipularEvento = this.state.manipularEvento;
                     let index = manipularEvento.index;
@@ -37,9 +46,15 @@ class ImageSelector extends React.Component {
                     }
                     manipularEvento.definirIndex(index);
                     manipularEvento.atualizar();
-                    this.setState({ manipularEvento: manipularEvento });
-                }}
-                onMouseUp={e => {                    
+                    
+                    this.setState({ manipularEvento: manipularEvento },() => {
+                        this.props.onChange(
+                            this.props.elementos[
+                                this.state.manipularEvento.index
+                            ].item
+                        );
+                    });
+
                     this.onClick = false;
                 }}
             />
@@ -63,7 +78,8 @@ class ImageSelector extends React.Component {
     }
 
     renderizarImagem(index) {
-        return (
+        let eixoY = this.props.eixoY ? this.props.eixoY : 0;
+        return (            
             <li style={{
                 paddingTop: '10px',
                 position: 'absolute',
@@ -72,7 +88,7 @@ class ImageSelector extends React.Component {
             }} key={index}>
                 <Image                    
                     eixoX={index}
-                    eixoY={0}
+                    eixoY={eixoY}
                     width={170}
                     height={170}
                     backgroundHeight={340}
@@ -99,7 +115,7 @@ class ImageSelector extends React.Component {
         }
 
         const lista = this.props.elementos.map(
-            (index) => this.renderizarImagem(index)
+            (entry,index) => this.renderizarImagem(index)
         );
 
         return (
@@ -109,48 +125,45 @@ class ImageSelector extends React.Component {
         )
     }
 
-
-    handleStart(e,clientX) {
+    onTouchStart(e) {                
         if (this.onClick) {
             e.stopPropagation()
             return;
-        }        
+        }
+        let clientX = e.targetTouches[0].clientX;
         let manipularEvento = this.state.manipularEvento;
         manipularEvento.iniciar(clientX);
         this.setState({ manipularEvento: manipularEvento });
     }
-    handleMove(e,clientX) {
+    onTouchMove(e) {
         if (this.onClick) {
             e.stopPropagation()
             return;
         }        
+        let clientX = e.targetTouches[0].clientX;
         let manipularEvento = this.state.manipularEvento;
         manipularEvento.mover(clientX);
-        this.setState({ manipularEvento: manipularEvento });
+        this.setState({ manipularEvento: manipularEvento });   
     }
-    handleEnd() {        
+    onTouchEnd() {         
+        if (this.onClick) {            
+            return;
+        }
         let manipularEvento = this.state.manipularEvento;
         manipularEvento.atualizar();
-        this.setState({ manipularEvento: manipularEvento });
+        this.setState({ manipularEvento: manipularEvento },() => {
+            this.props.onChange(
+                this.props.elementos[
+                    this.state.manipularEvento.index
+                ].item
+            );
+        });
     }
-
-    onTouchStart(e) {
-        e.preventDefault();
-        this.handleStart(e,e.targetTouches[0].clientX);        
-    }
-    onTouchMove(e) {
-        e.preventDefault();
-        this.handleMove(e,e.targetTouches[0].clientX);
-    }
-    onTouchEnd() { 
-        this.handleEnd();
-    }  
 
     render() {
-        const cor = this.props.valorInvalido ? '#d50000' : '#cccccc';
         const estiloDiv = {
             boxSizing: 'border-box',
-            border: `1px solid ${cor}`,
+            border: '1px solid #cccccc',
             borderRadius: '5px',        
             width: '380px',
             height: '195px',
@@ -163,7 +176,6 @@ class ImageSelector extends React.Component {
                 onTouchStart={this.onTouchStart.bind(this)}
                 onTouchMove={this.onTouchMove.bind(this)}
                 onTouchEnd={this.onTouchEnd.bind(this)}
-                
             >                
                 {this.renderizarButtonImage('esquerda')}
                 {this.renderizarSelecionado()}
