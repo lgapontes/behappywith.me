@@ -3,10 +3,9 @@ import Image from '../Image'
 import ButtonImage from '../ButtonImage'
 import ManipularEvento from './ManipularEvento'
 
-class ImageSelector extends React.Component {
+class ImageScroller extends React.Component {
     constructor(props) {
-        super(props)
-        this.onClick = false;        
+        super(props)        
 
         let comprimento = 170;
         let maxLeft = 105;
@@ -32,9 +31,11 @@ class ImageSelector extends React.Component {
             <ButtonImage
                 tipo='image-scroller'                
                 posicao={posicao}
-                onTouchStart={e => {
-                    this.onClick = true;
-                }}
+
+                onTouchStart={e => e.stopPropagation()}
+                onTouchMove={e => e.stopPropagation()}
+                onTouchEnd={e => e.stopPropagation()}
+
                 onClick={e => {
                     e.preventDefault();
                     let manipularEvento = this.state.manipularEvento;
@@ -51,11 +52,9 @@ class ImageSelector extends React.Component {
                         this.props.onChange(
                             this.props.elementos[
                                 this.state.manipularEvento.index
-                            ].item
+                            ]
                         );
                     });
-
-                    this.onClick = false;
                 }}
             />
         )
@@ -77,7 +76,7 @@ class ImageSelector extends React.Component {
         )
     }
 
-    renderizarImagem(index) {
+    renderizarImagem(entry,index) {
         let eixoY = this.props.eixoY ? this.props.eixoY : 0;
         return (            
             <li style={{
@@ -87,7 +86,7 @@ class ImageSelector extends React.Component {
                 marginLeft: `${index * 170}px`
             }} key={index}>
                 <Image                    
-                    eixoX={index}
+                    eixoX={entry.index}
                     eixoY={eixoY}
                     width={170}
                     height={170}
@@ -115,7 +114,7 @@ class ImageSelector extends React.Component {
         }
 
         const lista = this.props.elementos.map(
-            (entry,index) => this.renderizarImagem(index)
+            (entry,index) => this.renderizarImagem(entry,index)
         );
 
         return (
@@ -125,37 +124,26 @@ class ImageSelector extends React.Component {
         )
     }
 
-    onTouchStart(e) {                
-        if (this.onClick) {
-            e.stopPropagation()
-            return;
-        }
+    onTouchStart(e) {
         let clientX = e.targetTouches[0].clientX;
         let manipularEvento = this.state.manipularEvento;
         manipularEvento.iniciar(clientX);
         this.setState({ manipularEvento: manipularEvento });
     }
-    onTouchMove(e) {
-        if (this.onClick) {
-            e.stopPropagation()
-            return;
-        }        
+    onTouchMove(e) {        
         let clientX = e.targetTouches[0].clientX;
         let manipularEvento = this.state.manipularEvento;
         manipularEvento.mover(clientX);
         this.setState({ manipularEvento: manipularEvento });   
     }
-    onTouchEnd() {         
-        if (this.onClick) {            
-            return;
-        }
+    onTouchEnd(e) {
         let manipularEvento = this.state.manipularEvento;
         manipularEvento.atualizar();
         this.setState({ manipularEvento: manipularEvento },() => {
             this.props.onChange(
                 this.props.elementos[
                     this.state.manipularEvento.index
-                ].item
+                ]
             );
         });
     }
@@ -186,4 +174,4 @@ class ImageSelector extends React.Component {
     }
 }
 
-export default ImageSelector;
+export default ImageScroller;

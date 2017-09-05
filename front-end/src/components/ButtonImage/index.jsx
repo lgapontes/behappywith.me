@@ -1,17 +1,17 @@
 import React from 'react'
 import './index.css'
-import IconImage from '../IconImage'
+import Image from '../Image'
 
 export default function ButtonImage(props) {
-
     let classe = ''
     let estilo = {}
-    let pequeno = false
+    let tamanho = 48
     let index = props.index
 
+    /* Tipos de botões */
     if (props.tipo === 'image-scroller') {
         classe = 'option-image-scroller'
-        pequeno = true
+        tamanho = 30
 
         if (props.posicao === 'direita') {
             estilo.float = 'right'
@@ -33,7 +33,14 @@ export default function ButtonImage(props) {
             className={classe}
             {...propriedades}
         >
-            <IconImage pequeno={pequeno} index={index} />
+            <Image
+                eixoX={index}
+                eixoY={0}
+                width={tamanho}
+                height={tamanho}
+                backgroundHeight={tamanho}
+                arquivo="img/botoes.png"
+            />
         </div>
     )
 }

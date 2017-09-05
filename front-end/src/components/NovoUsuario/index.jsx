@@ -3,10 +3,10 @@ import Label from '../Label'
 import Input from '../Input'
 import GenderSelector from '../GenderSelector'
 import Usuario from '../../models/Usuario'
-import Listas from '../../models/Listas'
+import Avatar from '../../models/Avatar'
 import Button from '../Button'
 import Toast from '../Toast'
-import ImageSelector from '../ImageSelector'
+import ImageScroller from '../ImageScroller'
 
 class NovoUsuario extends React.Component {
     constructor(props) {
@@ -33,13 +33,15 @@ class NovoUsuario extends React.Component {
         e.preventDefault();
         let usuario = this.state.usuario;
         usuario.genero = genero;
+        usuario.avatar = 0;
         this.setState({
             usuario: usuario
         });
     }
-    primeiraValidacao(e) {
+    validar(e) {
         e.preventDefault();
         let usuario = this.state.usuario;
+
         let validacao = this.state.validacao;        
         validacao.nomeInvalido = ! usuario.validarNome();
         validacao.generoInvalido = ! usuario.validarGenero();        
@@ -62,12 +64,6 @@ class NovoUsuario extends React.Component {
         this.setState({
             validacao: validacao,
             primeiraVisaoCompleta: primeiraVisaoCompleta
-        });
-    }
-    voltar(e) {
-        e.preventDefault();
-        this.setState({            
-            primeiraVisaoCompleta: false
         });
     }
 
@@ -120,14 +116,14 @@ class NovoUsuario extends React.Component {
                         texto="Escolha seu avatar:"
                         valorInvalido={this.state.validacao.avatarInvalido}
                     />
-                    <ImageSelector                    
+                    <ImageScroller                    
                         arquivo="img/avatars.png"
                         eixoY={(this.state.usuario.genero == 'm' ? 0 : 1)}
-                        elementos={Listas.avatares}
+                        elementos={Avatar.obterTodos}
                         selecionado={this.state.usuario.avatar}
                         onChange={avatar => {                            
                             let usuario = this.state.usuario;
-                            usuario.avatar = avatar;                            
+                            usuario.avatar = avatar.index;                            
                             this.setState({                                
                                 usuario: usuario                                
                             });
@@ -146,7 +142,15 @@ class NovoUsuario extends React.Component {
                 <section>
                     <Button
                         texto="Voltar"
-                        onClick={this.voltar.bind(this)}
+                        onClick={e => {
+                            e.preventDefault();
+                            let usuario = this.state.usuario
+                            usuario.avatar = 0;
+                            this.setState({
+                                usuario: usuario,
+                                primeiraVisaoCompleta: false
+                            });
+                        }}
                     />
                     <Button
                         principal
@@ -164,7 +168,7 @@ class NovoUsuario extends React.Component {
                     <Button
                         principal
                         texto="Próximo"
-                        onClick={this.primeiraValidacao.bind(this)}
+                        onClick={this.validar.bind(this)}
                     />
                 </section>
             )
