@@ -1,14 +1,19 @@
 class ManipularEvento {
-    constructor(minLeft,maxLeft,comprimentoItem,index,minIndex,maxIndex) {
-        this.minLeft = minLeft;
-        this.maxLeft = maxLeft;
-        this.comprimentoItem = comprimentoItem;
+    constructor(qtdeElementos,index) {        
+        this.maxIndex = qtdeElementos;
         this.index = index;
-        this.minIndex = minIndex;
-        this.maxIndex = maxIndex;
-        this.direcao = 0;
+        
+        this.comprimentoItem = 170;
+        this.maxLeft = 105;
+        this.left = this.maxLeft;
 
-        this.left = maxLeft;
+        this.minLeft = (
+            (qtdeElementos - 1) *
+            this.comprimentoItem * (-1)
+        ) + this.maxLeft;
+        
+        this.minIndex = 0;
+        this.direcao = 0;        
         this.deslocamento = 0;        
         this.toqueInicial = 0;
         this.toqueAnterior = 0;
@@ -18,16 +23,16 @@ class ManipularEvento {
     definirIndex(index) {        
         if ((index >= this.minIndex) && (index < this.maxIndex)) {
             this.index = index;
-        }        
+        }                
     }
     
-    iniciar(x) {                
+    iniciar(x) {
         this.deslocamento = this.left;        
         this.toqueInicial = x;
         this.toqueEmExecucao = true;
     }
         
-    mover(x) {
+    mover(x) {        
         if (this.toqueEmExecucao) {
             const toqueX = x;
             this.swipe(toqueX);
@@ -36,11 +41,18 @@ class ManipularEvento {
             this.toqueAnterior = toqueX;
         }
     }
-        
-    atualizar() {        
+
+    atualizarClique() {
+        this.atualizar(false)
+    }
+    atualizarToque() {
+        this.atualizar(true)
+    }
+
+    atualizar(toque) {
         this.toqueInicial = 0;
         this.toqueEmExecucao = false;
-        this.corrigirIndex();    
+        if (toque) this.corrigirIndex();
         this.left = (this.index * this.comprimentoItem * (-1)) + this.maxLeft;
     }
 

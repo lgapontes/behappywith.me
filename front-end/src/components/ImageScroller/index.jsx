@@ -7,21 +7,19 @@ class ImageScroller extends React.Component {
     constructor(props) {
         super(props)        
 
+        /*
         let comprimento = 170;
         let maxLeft = 105;
         let minLeft = (
             (this.props.elementos.length - 1) *
             comprimento * (-1)
         ) + maxLeft;
+        */
 
         this.state = {
             manipularEvento: new ManipularEvento(
-                minLeft,
-                maxLeft,
-                comprimento,
-                this.props.selecionado,
-                0,
-                this.props.elementos.length
+                this.props.elementos.length,
+                this.props.selecionado
             )
         }
     }
@@ -46,7 +44,7 @@ class ImageScroller extends React.Component {
                         index += 1;
                     }
                     manipularEvento.definirIndex(index);
-                    manipularEvento.atualizar();
+                    manipularEvento.atualizarClique();
                     
                     this.setState({ manipularEvento: manipularEvento },() => {
                         this.props.onChange(
@@ -138,7 +136,7 @@ class ImageScroller extends React.Component {
     }
     onTouchEnd(e) {
         let manipularEvento = this.state.manipularEvento;
-        manipularEvento.atualizar();
+        manipularEvento.atualizarToque();
         this.setState({ manipularEvento: manipularEvento },() => {
             this.props.onChange(
                 this.props.elementos[
