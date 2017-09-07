@@ -5,17 +5,8 @@ import ManipularEvento from './ManipularEvento'
 
 class ImageScroller extends React.Component {
     constructor(props) {
-        super(props)        
-
-        /*
-        let comprimento = 170;
-        let maxLeft = 105;
-        let minLeft = (
-            (this.props.elementos.length - 1) *
-            comprimento * (-1)
-        ) + maxLeft;
-        */
-
+        super(props)
+        
         this.state = {
             manipularEvento: new ManipularEvento(
                 this.props.elementos.length,

@@ -32,9 +32,8 @@ class ManipularEvento {
         this.toqueEmExecucao = true;
     }
         
-    mover(x) {        
-        if (this.toqueEmExecucao) {
-            const toqueX = x;
+    mover(toqueX) {        
+        if (this.toqueEmExecucao) {            
             this.swipe(toqueX);
             this.flinging(toqueX);
             this.calcularDirecao(toqueX);
@@ -75,10 +74,10 @@ class ManipularEvento {
         );
 
         let diferenca = toqueX - this.toqueAnterior;
-        let comprimento = Math.abs(diferenca);
+        let extensaoToque = Math.abs(diferenca);
         
         let bonus = 0;
-        if (comprimento < this.comprimentoItem) {
+        if (extensaoToque < this.comprimentoItem) {
             
             if (diferenca < 0) {
                 bonus = 1;
