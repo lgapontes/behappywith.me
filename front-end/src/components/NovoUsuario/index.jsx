@@ -33,7 +33,7 @@ class NovoUsuario extends React.Component {
         e.preventDefault();
         let usuario = this.state.usuario;
         usuario.genero = genero;
-        usuario.avatar = 0;
+        usuario.avatar = Avatar.obterTodos()[0];
         this.setState({
             usuario: usuario
         });
@@ -119,11 +119,11 @@ class NovoUsuario extends React.Component {
                     <ImageScroller                    
                         arquivo="img/avatars.png"
                         eixoY={(this.state.usuario.genero == 'm' ? 0 : 1)}
-                        elementos={Avatar.obterTodos}
+                        elementos={Avatar.obterTodos()}
                         selecionado={this.state.usuario.avatar}
                         onChange={avatar => {                            
                             let usuario = this.state.usuario;
-                            usuario.avatar = avatar.index;                            
+                            usuario.avatar = avatar;
                             this.setState({                                
                                 usuario: usuario                                
                             });
@@ -145,7 +145,7 @@ class NovoUsuario extends React.Component {
                         onClick={e => {
                             e.preventDefault();
                             let usuario = this.state.usuario
-                            usuario.avatar = 0;
+                            usuario.avatar = Avatar.obterTodos()[0];
                             this.setState({
                                 usuario: usuario,
                                 primeiraVisaoCompleta: false

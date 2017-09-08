@@ -10,9 +10,15 @@ class ImageScroller extends React.Component {
         this.state = {
             manipularEvento: new ManipularEvento(
                 this.props.elementos.length,
-                this.props.selecionado
+                this.props.selecionado.index
             )
         }
+    }
+
+    obterSelecionado() {
+        return this.props.elementos[
+            this.state.manipularEvento.index
+        ]
     }
 
     renderizarButtonImage(posicao) {
@@ -38,11 +44,7 @@ class ImageScroller extends React.Component {
                     manipularEvento.atualizarClique();
                     
                     this.setState({ manipularEvento: manipularEvento },() => {
-                        this.props.onChange(
-                            this.props.elementos[
-                                this.state.manipularEvento.index
-                            ]
-                        );
+                        this.props.onChange(this.obterSelecionado());
                     });
                 }}
             />
@@ -55,7 +57,7 @@ class ImageScroller extends React.Component {
                 style={{
                     float: 'left',
                     width: '170px',
-                    height: '193px',
+                    height: '194px',
                     marginLeft: '61px',
                     backgroundColor: '#00C853',
                     position: 'relative',
@@ -113,6 +115,61 @@ class ImageScroller extends React.Component {
         )
     }
 
+    renderizarImageScroller() {
+        const estilo = {
+            boxSizing: 'border-box',
+            borderWidth: '1px',
+            borderStyle: 'solid',
+            borderBottomWidth: '0px',
+            borderColor: '#cccccc',
+            borderRadius: '5px',   
+            borderBottomLeftRadius: '0px',
+            borderBottomRightRadius: '0px',            
+            width: '380px',
+            height: '195px',
+            overflow: 'hidden'
+        };
+                
+        return (
+            <div
+                style={estilo}
+                onTouchStart={this.onTouchStart.bind(this)}
+                onTouchMove={this.onTouchMove.bind(this)}
+                onTouchEnd={this.onTouchEnd.bind(this)}
+            >                
+                {this.renderizarButtonImage('esquerda')}
+                {this.renderizarSelecionado()}
+                {this.renderizarImagens()}
+                {this.renderizarButtonImage('direita')}
+            </div>
+        )
+    }
+
+    renderizarLabel() {
+        const estilo = {
+            boxSizing: 'border-box',            
+            borderWidth: '1px',
+            borderStyle: 'solid',
+            borderTopWidth: '0px',
+            borderColor: '#cccccc',
+            borderRadius: '5px',
+            borderTopLeftRadius: '0px',
+            borderTopRightRadius: '0px',            
+            backgroundColor: '#cccccc',
+            color: '#444444',
+            fontSize: '20px',
+            textAlign: 'center',
+            padding: '5px',
+            width: '380px'
+        };
+
+        return (
+            <div style={estilo}>
+                {this.obterSelecionado().toString()}
+            </div>
+        )
+    }
+
     onTouchStart(e) {
         let clientX = e.targetTouches[0].clientX;
         let manipularEvento = this.state.manipularEvento;
@@ -129,35 +186,15 @@ class ImageScroller extends React.Component {
         let manipularEvento = this.state.manipularEvento;
         manipularEvento.atualizarToque();
         this.setState({ manipularEvento: manipularEvento },() => {
-            this.props.onChange(
-                this.props.elementos[
-                    this.state.manipularEvento.index
-                ]
-            );
+            this.props.onChange(this.obterSelecionado());
         });
     }
 
     render() {
-        const estiloDiv = {
-            boxSizing: 'border-box',
-            border: '1px solid #cccccc',
-            borderRadius: '5px',        
-            width: '380px',
-            height: '195px',
-            overflow: 'hidden'
-        };
-                
         return (
-            <div
-                style={estiloDiv}
-                onTouchStart={this.onTouchStart.bind(this)}
-                onTouchMove={this.onTouchMove.bind(this)}
-                onTouchEnd={this.onTouchEnd.bind(this)}
-            >                
-                {this.renderizarButtonImage('esquerda')}
-                {this.renderizarSelecionado()}
-                {this.renderizarImagens()}
-                {this.renderizarButtonImage('direita')}
+            <div>
+                {this.renderizarImageScroller()}
+                {this.renderizarLabel()}
             </div>
         )
     }
