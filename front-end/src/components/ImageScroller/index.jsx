@@ -69,14 +69,14 @@ class ImageScroller extends React.Component {
 
     renderizarImagem(entry,index) {
         let eixoY = this.props.eixoY ? this.props.eixoY : 0;
-        return (            
+        return (
             <li style={{
                 paddingTop: '10px',
                 position: 'absolute',
                 zIndex: '-1',
                 marginLeft: `${index * 170}px`
-            }} key={index}>
-                <Image                    
+            }} key={index + entry.toString()}>
+                <Image
                     eixoX={entry.index}
                     eixoY={eixoY}
                     width={170}

@@ -116,7 +116,7 @@ class NovoUsuario extends React.Component {
                         texto="Escolha seu avatar:"
                         valorInvalido={this.state.validacao.avatarInvalido}
                     />
-                    <ImageScroller                    
+                    <ImageScroller
                         arquivo="img/avatars.png"
                         eixoY={(this.state.usuario.genero == 'm' ? 0 : 1)}
                         elementos={Avatar.obterTodos()}
