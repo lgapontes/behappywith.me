@@ -92,15 +92,18 @@ class ImageScroller extends React.Component {
         const ms = this.state.manipularEvento.toqueEmExecucao
             ? '100ms' : '800ms'
 
-        const ul = {
-            WebkitTransitionDuration: ms, /* Safari */
-            transitionDuration: ms,
+        const estilo = {
+            WebkitTransitionDuration: ms, /* Safari e Chrome */
+            MsTransitionDuration: ms, /* IE */
+            MozTransitionDuration: ms, /* Firefox */
+            OTransitionDuration: ms, /* Opera */
+            transitionDuration: ms, /* Nativa do W3C */
 
             listStyleType: 'none',
             margin: '0',
             padding: '0',
             position: 'relative',
-            width: '3910px',
+            width: '3910px', /* ERRO AQUI!!!! */
             left: `${this.state.manipularEvento.left}px`
         }
 
@@ -109,7 +112,7 @@ class ImageScroller extends React.Component {
         );
 
         return (
-            <ul style={ul}>                
+            <ul style={estilo}>                
                 {lista}
             </ul>            
         )
