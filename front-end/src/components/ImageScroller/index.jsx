@@ -103,10 +103,10 @@ class ImageScroller extends React.Component {
             margin: '0',
             padding: '0',
             position: 'relative',
-            width: '3910px', /* ERRO AQUI!!!! */
+            width: `${this.props.elementos.length * 170}px`,
             left: `${this.state.manipularEvento.left}px`
         }
-
+        
         const lista = this.props.elementos.map(
             (entry,index) => this.renderizarImagem(entry,index)
         );

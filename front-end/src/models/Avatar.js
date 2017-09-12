@@ -7,7 +7,7 @@ class Avatar {
         return this.descricao;
     }
     static obterTodos() {
-        return Array(22).fill(0).map((entry,i) => {
+        return Array(23).fill(0).map((entry,i) => {
             return new Avatar(i,`Avatar ${i+1}`)
         })
     }
