@@ -122,15 +122,15 @@ class ImageScroller extends React.Component {
         const estilo = {
             boxSizing: 'border-box',
             borderWidth: '1px',
-            borderStyle: 'solid',
             borderBottomWidth: '0px',
+            borderStyle: 'solid',            
             borderColor: '#cccccc',
             borderRadius: '5px',   
             borderBottomLeftRadius: '0px',
             borderBottomRightRadius: '0px',            
             width: '380px',
             height: '195px',
-            overflow: 'hidden'
+            overflow: 'hidden'        
         };
                 
         return (
