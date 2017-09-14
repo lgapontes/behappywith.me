@@ -5,7 +5,6 @@ import GenderSelector from '../GenderSelector'
 import Usuario from '../../models/Usuario'
 import Avatar from '../../models/Avatar'
 import Button from '../Button'
-import Toast from '../Toast'
 import ImageScroller from '../ImageScroller'
 
 class NovoUsuario extends React.Component {
@@ -57,8 +56,8 @@ class NovoUsuario extends React.Component {
         } else {
             primeiraVisaoCompleta = true;
         }
-        if (!primeiraVisaoCompleta) {
-            this.refs.toast.exibir(mensagem);
+        if (!primeiraVisaoCompleta) {            
+            this.props.erro(mensagem);
         }
 
         this.setState({
@@ -114,7 +113,6 @@ class NovoUsuario extends React.Component {
                 <section>
                     <Label
                         texto="Escolha seu avatar:"
-                        valorInvalido={this.state.validacao.avatarInvalido}
                     />
                     <ImageScroller
                         arquivo="img/avatars.png"
@@ -157,7 +155,7 @@ class NovoUsuario extends React.Component {
                         texto="Salvar"
                         onClick={e => {
                             e.preventDefault()
-                            console.log(this.state.usuario)
+                            this.props.onSubmit(this.state.usuario)
                         }}
                     />
                 </section>
@@ -182,8 +180,7 @@ class NovoUsuario extends React.Component {
                     {this.renderizarNome()}
                     {this.renderizarGenero()}
                     {this.renderizarAvatar()}
-                    {this.renderizarBotoes()}
-                    <Toast erro ref="toast" />
+                    {this.renderizarBotoes()}                    
                 </form>
             </div>
         );

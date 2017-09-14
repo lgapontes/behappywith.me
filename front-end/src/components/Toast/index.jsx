@@ -3,24 +3,20 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
 class Toast extends React.Component {
-    constructor(props) {
-        super(props);        
-        this.state = {
-            tipo: props.erro ? 'error' : (
-                props.sucesso ? 'success' : 'info'
-            )
-        }
+    sucesso(msg) {
+        toast.success(msg)
     }
-
-    exibir(msg) {
-        toast[this.state.tipo](msg)
+    info(msg) {
+        toast.info(msg)
+    }
+    erro(msg) {
+        toast.error(msg)
     }
 
     render() {
         return (
             <ToastContainer 
-                position="bottom-center"
-                type={this.state.tipo}
+                position="bottom-center"           
                 autoClose={5000}
                 hideProgressBar={true}
                 closeOnClick
