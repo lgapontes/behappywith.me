@@ -6,9 +6,9 @@ export default function GenderImage(props) {
         <Image
             eixoX={0}
             eixoY={(props.genero === 'm') ? 0 : 1}
-            width={170}
-            height={170}
-            backgroundHeight={340}
+            width={140}
+            height={140}
+            backgroundHeight={280}
             arquivo="img/avatars.png"
         />
     )

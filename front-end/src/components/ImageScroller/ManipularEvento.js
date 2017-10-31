@@ -3,8 +3,8 @@ class ManipularEvento {
         this.maxIndex = qtdeElementos;
         this.index = index;
         
-        this.comprimentoItem = 170;
-        this.maxLeft = 105;
+        this.comprimentoItem = 140;
+        this.maxLeft = 86;
         this.left = this.maxLeft;
 
         this.minLeft = (

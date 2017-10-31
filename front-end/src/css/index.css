@@ -6,10 +6,10 @@
 
 div.center {        
     box-sizing: border-box;
-    padding: 10px;
+    padding: 5px;
     display: table;
     margin: 0 auto;
-    min-width: 400px;    
+    min-width: 320px;    
     margin-top: 92px;
 }
 

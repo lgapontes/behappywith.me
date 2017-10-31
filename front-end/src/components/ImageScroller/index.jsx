@@ -56,9 +56,9 @@ class ImageScroller extends React.Component {
             <span
                 style={{
                     float: 'left',
-                    width: '170px',
-                    height: '194px',
-                    marginLeft: '61px',
+                    width: '140px',
+                    height: '160px',
+                    marginLeft: '42px',
                     backgroundColor: '#00C853',
                     position: 'relative',
                     zIndex: -2
@@ -71,17 +71,17 @@ class ImageScroller extends React.Component {
         let eixoY = this.props.eixoY ? this.props.eixoY : 0;
         return (
             <li style={{
-                paddingTop: '10px',
+                paddingTop: '8px',
                 position: 'absolute',
                 zIndex: '-1',
-                marginLeft: `${index * 170}px`
+                marginLeft: `${index * 140}px`
             }} key={index + entry.toString()}>
                 <Image
                     eixoX={entry.index}
                     eixoY={eixoY}
-                    width={170}
-                    height={170}
-                    backgroundHeight={340}
+                    width={140}
+                    height={140}
+                    backgroundHeight={280}
                     arquivo={this.props.arquivo}
                 />
             </li>
@@ -103,7 +103,7 @@ class ImageScroller extends React.Component {
             margin: '0',
             padding: '0',
             position: 'relative',
-            width: `${this.props.elementos.length * 170}px`,
+            width: `${this.props.elementos.length * 140}px`,
             left: `${this.state.manipularEvento.left}px`
         }
         
@@ -128,8 +128,8 @@ class ImageScroller extends React.Component {
             borderRadius: '5px',   
             borderBottomLeftRadius: '0px',
             borderBottomRightRadius: '0px',            
-            width: '380px',
-            height: '195px',
+            width: '310px',
+            height: '160px',
             overflow: 'hidden'        
         };
                 
@@ -163,7 +163,7 @@ class ImageScroller extends React.Component {
             fontSize: '20px',
             textAlign: 'center',
             padding: '5px',
-            width: '380px'
+            width: '310px'
         };
 
         return (
