@@ -2,21 +2,60 @@ import React from 'react';
 import Header from './Header';
 import NovoUsuario from './NovoUsuario';
 import Toast from './Toast';
+import Usuario from '../models/Usuario'
+import Label from './Label'
 
 class App extends React.Component {
+    constructor() {
+        super()
+        Usuario.obter(usuario => {            
+            this.state = {
+                usuario: usuario
+            };            
+        },() => {
+            this.state = {
+                usuario: undefined
+            };            
+        });
+    }
+    msgNovoUsuario(usuario) {
+        let genero = usuario.genero == 'm' ? 'o' : 'a';
+        this.refs.toast.sucesso(
+            `Seja bem-vind${genero} ${usuario.nome}!`
+        )
+    }
+    renderizarNovoUsuario() {
+        let usuario = this.state.usuario;        
+        if (usuario) {
+            return (
+                <div style={{marginTop: '80px', marginLeft: '10px'}}>
+                    <b>Usuário obtido do <i>localStorage</i></b><br />
+                    {usuario.toString()}
+                </div>
+            )
+        } else {
+            return (
+                <NovoUsuario
+                    onSubmit={usuario => {                        
+                        usuario.salvar(() => {
+                            this.setState({
+                                usuario: usuario
+                            }, () => {
+                                this.msgNovoUsuario(usuario)
+                            })                            
+                        });
+                    }}
+                    erro={msg=>this.refs.toast.erro(msg)}
+                />
+            )
+        }      
+    }
+
     render() {
         return (
             <div>
                 <Header />
-                <NovoUsuario
-                    onSubmit={usuario => {
-                        let genero = usuario.genero == 'm' ? 'o' : 'a'                        
-                        this.refs.toast.sucesso(
-                            `Seja bem-vind${genero} ${usuario.nome}!`
-                        )
-                    }}
-                    erro={msg=>this.refs.toast.erro(msg)}
-                />
+                {this.renderizarNovoUsuario()}
                 <Toast ref="toast" />
             </div>
         );

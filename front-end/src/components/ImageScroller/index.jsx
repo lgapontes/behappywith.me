@@ -23,8 +23,7 @@ class ImageScroller extends React.Component {
 
     renderizarButtonImage(posicao) {
         return (
-            <ButtonImage
-                tipo='image-scroller'                
+            <ButtonImage                             
                 posicao={posicao}
 
                 onTouchStart={e => e.stopPropagation()}

@@ -2,35 +2,25 @@ import React from 'react'
 import './index.css'
 import Image from '../Image'
 
-export default function ButtonImage(props) {
-    let classe = ''
-    let estilo = {}
-    let tamanho = 48
-    let index = props.index
-
-    /* Tipos de botões */
-    if (props.tipo === 'image-scroller') {
-        classe = 'option-image-scroller'
-        tamanho = 30
-
-        if (props.posicao === 'direita') {
-            estilo.float = 'right'
-            index = 1
-        } else {
-            estilo.float = 'left'
-            index = 0
-        }
+export default function ButtonImage(props) {    
+    let estilo = {};
+    let index = 0;
+    if (props.posicao === 'direita') {
+        estilo.float = 'right'
+        index = 1
+    } else {
+        estilo.float = 'left'
+        index = 0
     }
+    const tamanho = 30;
 
-    let propriedades = Object.assign({},props);
-    delete propriedades.index;
-    delete propriedades.tipo;
+    let propriedades = Object.assign({},props);        
     delete propriedades.posicao;
 
     return (
         <div
             style={estilo}
-            className={classe}
+            className='option-image-scroller'
             {...propriedades}
         >
             <Image
