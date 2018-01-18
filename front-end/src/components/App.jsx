@@ -3,7 +3,6 @@ import Header from './Header';
 import NovoUsuario from './NovoUsuario';
 import Toast from './Toast';
 import Usuario from '../models/Usuario'
-import Label from './Label'
 
 class App extends React.Component {
     constructor() {
