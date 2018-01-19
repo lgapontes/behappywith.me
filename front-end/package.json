@@ -8,6 +8,7 @@
   "author": "Guilherme Pontes <email@lgapontes.com> (http://lgapontes.com)",
   "license": "ISC",
   "dependencies": {
+    "offline-plugin": "^4.9.0",
     "react": "15.6.1",
     "react-dom": "15.6.1",
     "react-toastify": "^2.0.0-rc.3"

@@ -3,13 +3,24 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const OfflinePlugin = require('offline-plugin');
+//require('offline-plugin/runtime').install();
 
 plugins = [
     new HtmlWebpackPlugin({
         filename: 'index.html',
         template: path.join(__dirname, 'src/index.html')
     }),
-    new ExtractTextPlugin('style.css')    
+    new ExtractTextPlugin('style.css'),
+    new OfflinePlugin({        
+        caches: {
+            main: [
+            '*.html',
+            '*.css',
+            '*.js',
+            ]            
+        }
+    })
 ];
 
 if (process.env.NODE_ENV === 'production') {
