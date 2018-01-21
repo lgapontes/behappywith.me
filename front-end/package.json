@@ -2,7 +2,7 @@
   "name": "behappywith.me",
   "version": "1.0.0",
   "scripts": {
-    "start": "NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "start": "NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --no-inline",
     "build": "NODE_ENV=production node_modules/webpack/bin/webpack.js"
   },
   "author": "Guilherme Pontes <email@lgapontes.com> (http://lgapontes.com)",

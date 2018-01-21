@@ -51,6 +51,10 @@ module.exports = {
             loader: 'file-loader?name=img/[name].[ext]'
         },
         {
+            test: /\.(appcache)$/i,
+            loader: 'file-loader?name=[name].[ext]'
+        },
+        {
             test: /\.css$/,
             use: ExtractTextPlugin.extract({
                 fallback: "style-loader",

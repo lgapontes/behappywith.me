@@ -6,6 +6,8 @@ import './img/favicon.ico';
 import './css/index.css';
 import './css/pure-min.css';
 
+import './behappy.appcache'
+
 import App from './components/App.jsx'
 
 ReactDOM.render(
