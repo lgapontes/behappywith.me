@@ -5,7 +5,6 @@ var idAnterior = identificador + '-' + (versao - 1);
 
 var urls = [    
     '/',
-    //'behappy.sw.js',
     'bundle.js',
     'style.css',
     'img/avatars.png',
@@ -30,51 +29,12 @@ function ativarServiceWorker() {
     })
 }
 
-// XXXXXXXXX
-function precisoBuscar(url) {
-    /*
-    if (url.indexOf(identificador) > -1)
-    caches.has(idAtual).then(existe => callback(existe))
-    */
-
-    
-    if (!navigator.onLine) {        
-        var precisa = url.indexOf(identificador) > -1 ? false : true;
-        console.log('Precisa? ' + precisa + " " + url)
-        return precisa;
-    }
-    return true;
-}
-
-function precisoBuscar2(url,callback) {
-    console.log(url);
-    console.log(url.indexOf(identificador) > -1);
-    if (url.indexOf(identificador) > -1) {
-        caches.has(idAtual).then(existe => callback(existe))
-    } else {
-        callback(true)
-    }
-}
-// XXXXXXXXX
-
 function buscarArquivos(event) {    
-    let request = event.request;
-    let promise = caches.match(request).then(arquivo => {
-        return arquivo ? arquivo : fetch(pedido)
-    })
-    event.respondWith(promise)
-
-    /*
     event.respondWith(
         caches.match(request).then(function(arquivoCache) {
-            if (arquivoCache) {
-                return arquivoCache
-            } else {
-                return fetch(request);
-            }
+            return arquivoCache ? arquivoCache : fetch(request);
         })
     )
-    */
 }
 
 self.addEventListener("install", instalarServiceWorker);
