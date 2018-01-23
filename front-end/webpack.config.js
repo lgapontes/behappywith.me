@@ -28,14 +28,14 @@ module.exports = {
         filename: 'bundle.js'
     },    
     resolve: {
-        extensions: [".js",".jsx"]
+        extensions: [".js",".jsx"]        
     },
     plugins: plugins,
     module: {
         rules: [
         {
             test: /.jsx?$/,
-            exclude: /node_modules/,
+            exclude: [/node_modules/,'src/behappy.sw.js'],
             include: path.join(__dirname, 'src'),
             use: [
             {
@@ -51,7 +51,7 @@ module.exports = {
             loader: 'file-loader?name=img/[name].[ext]'
         },
         {
-            test: /\.(appcache)$/i,
+            test: /\.(appcache|sw.js)$/i,
             loader: 'file-loader?name=[name].[ext]'
         },
         {
