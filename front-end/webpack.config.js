@@ -35,7 +35,7 @@ module.exports = {
         rules: [
         {
             test: /.jsx?$/,
-            exclude: [/node_modules/,'src/behappy.sw.js'],
+            exclude: /node_modules/,
             include: path.join(__dirname, 'src'),
             use: [
             {
@@ -51,10 +51,6 @@ module.exports = {
             loader: 'file-loader?name=img/[name].[ext]'
         },
         {
-            test: /\.(appcache|sw.js)$/i,
-            loader: 'file-loader?name=[name].[ext]'
-        },
-        {
             test: /\.css$/,
             use: ExtractTextPlugin.extract({
                 fallback: "style-loader",
@@ -65,6 +61,7 @@ module.exports = {
     },
     devServer: {
         publicPath: "/",
-        contentBase: "./dist"
+        contentBase: "./dist",
+        headers: { "Cache-Control": "max-age=600" }
     }
 };
