@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './Header';
 import NovoUsuario from './NovoUsuario';
 import Toast from './Toast';
-import Usuario from '../models/Usuario'
+import Usuario from '../models/Usuario';
 
 class App extends React.Component {
     constructor() {

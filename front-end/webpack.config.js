@@ -62,6 +62,7 @@ module.exports = {
     devServer: {
         publicPath: "/",
         contentBase: "./dist",
-        headers: { "Cache-Control": "max-age=600" }
+        headers: { "Cache-Control": "max-age=600" },
+        historyApiFallback: true
     }
 };
