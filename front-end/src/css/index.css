@@ -13,6 +13,23 @@ div.center {
     margin-top: 92px;
 }
 
+noscript div {
+    background-color: #2c80b9;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    padding: 10px 10px 100px 10px;
+    border: 0;
+    position: relative;
+}
+
+noscript div img {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
 @media (max-width: 992px) {
     div.center {
         margin-top: 78px;
