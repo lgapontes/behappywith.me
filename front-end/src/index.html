@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<!--<html manifest="behappy.appcache">-->
-<html>
+<html manifest="behappy.appcache">
     <head>
         <link rel="manifest" href="/manifest.json">
         <meta charset="utf-8">
@@ -16,13 +15,12 @@
         <script>   
             <!--        
             if('serviceWorker' in navigator) {
-                /*
-                navigator.serviceWorker.register('behappy.sw.js').then(function(registration) {
-                    console.log('ServiceWorker registrado com sucesso!');
-                }).catch(function(err) {
-                    console.log('Houve uma falha ao registrar o ServiceWorker: ', err);
+                navigator.serviceWorker.register('behappy.sw.js')
+                    .then(function(registration) {
+                        console.log('ServiceWorker registrado com sucesso!');
+                    }).catch(function(err) {
+                        console.log('Erro no registro: ', err);
                 });
-                */
             }
             //-->
         </script>

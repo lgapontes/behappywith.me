@@ -3,6 +3,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const fs = require('fs');
 
 plugins = [
     new HtmlWebpackPlugin({
@@ -62,6 +63,11 @@ module.exports = {
     devServer: {
         publicPath: "/",
         contentBase: "./dist",
-        headers: { "Cache-Control": "max-age=600" }
+        headers: { "Cache-Control": "max-age=600" },        
+        /*
+        https: {
+            cert: fs.readFileSync("/etc/ssl/certs/behappy-public.pem"),
+            key: fs.readFileSync("/etc/ssl/private/behappy-private.key")
+        }*/
     }
 };
