@@ -65,6 +65,7 @@ module.exports = {
         contentBase: "./dist",
         headers: { "Cache-Control": "max-age=600" },        
         /*
+        Pode ser utilizado para testes.
         https: {
             cert: fs.readFileSync("/etc/ssl/certs/behappy-public.pem"),
             key: fs.readFileSync("/etc/ssl/private/behappy-private.key")

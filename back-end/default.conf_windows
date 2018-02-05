@@ -2,14 +2,14 @@ server {
     listen 443 ssl;
     server_name behappywith.me www.behappywith.me;
         
-    ssl_certificate /etc/ssl/certs/behappy-public.pem;
-	ssl_certificate_key /etc/ssl/private/behappy-private.key;
+    ssl_certificate C:\Users\Public\ssl\certs\behappy-public.pem;
+	ssl_certificate_key C:\Users\Public\ssl\private\behappy-private.key;
 	ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
     ssl_ciphers HIGH:!aNULL:!MD5;
     
-    access_log /var/log/behappy/access.log;    
+    access_log C:\Users\Public\behappywith.me\log\access.log;    
 
-    root /opt/repositories/github/behappywith.me/front-end/dist;
+    root C:\Users\Public\behappywith.me\front-end\dist;
 
     location /img/favicon.ico {
         access_log off;
@@ -22,7 +22,6 @@ server {
         index index.html;
         try_files $uri $uri/ /index.html;
     }
-    # error_page 404 =200 /index.html;
 }
 
 server {
