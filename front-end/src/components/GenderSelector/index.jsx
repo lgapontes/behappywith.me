@@ -11,7 +11,7 @@ export default function GenderSelector(props) {
         border: `1px solid ${cor}`,
         borderRadius: '5px',
         padding: '2px',
-        paddingBottom: '0px'
+        paddingBottom: '0'
     };
 
     return (

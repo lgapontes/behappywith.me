@@ -19,7 +19,7 @@ div.header h4.label {
     font-weight: normal;
     line-height: 92px;
     float: left;
-    margin: 0px;
+    margin: 0;
 }
 
 @media (max-width: 992px) {
