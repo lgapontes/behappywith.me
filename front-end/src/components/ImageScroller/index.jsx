@@ -6,7 +6,7 @@ import ManipularEvento from './ManipularEvento'
 class ImageScroller extends React.Component {
     constructor(props) {
         super(props)
-        
+
         this.state = {
             manipularEvento: new ManipularEvento(
                 this.props.elementos.length,

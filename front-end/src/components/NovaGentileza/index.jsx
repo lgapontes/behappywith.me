@@ -28,7 +28,8 @@ class NovaGentileza extends React.Component {
                     selecionado={this.state.gentileza}
                     onChange={gentileza => {
                         this.setState({                                
-                            gentileza: gentileza                                
+                            gentileza: gentileza,
+                            destinatario: gentileza.obterDestinatarios()[0]
                         });
                     }}
                 />
@@ -42,6 +43,7 @@ class NovaGentileza extends React.Component {
                     texto="Para quem?"
                 />
                 <ImageScroller
+                    key={`destinatarios-${this.state.gentileza.toString()}`}
                     arquivo="img/gentilezas.png"
                     eixoY={1}
                     elementos={this.state.gentileza.obterDestinatarios()}
