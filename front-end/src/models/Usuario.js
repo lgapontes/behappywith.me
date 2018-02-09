@@ -1,5 +1,7 @@
-import Avatar from './Avatar'
+import Avatar from './Avatar';
+import Gentileza from './Gentileza';
 import Repository from '../infrastructure/Repository';
+
 const repository = new Repository();
 
 class Usuario {

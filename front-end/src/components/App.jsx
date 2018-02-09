@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import NovoUsuario from './NovoUsuario';
+import NovaGentileza from './NovaGentileza';
 import Toast from './Toast';
 import Usuario from '../models/Usuario'
 
@@ -49,12 +50,18 @@ class App extends React.Component {
             )
         }      
     }
+    renderizarNovaGentileza() {
+        return (
+            <NovaGentileza
+            />
+        )   
+    }
 
     render() {
         return (
             <div>
                 <Header />
-                {this.renderizarNovoUsuario()}
+                {this.renderizarNovaGentileza()}
                 <Toast ref="toast" />
             </div>
         );
