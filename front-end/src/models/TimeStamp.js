@@ -27,13 +27,60 @@ function obterData(str) {
     let segundo = str.substring(17, 19);
     let mili = str.substring(20, 23);
 
-    return new 
+    return new Date(ano, mes-1, dia, hora, minuto, segundo, mili);
+}
+
+function diferenca(dataMaisAntiga,dataMaisRecente) {
+    let ms = dataMaisRecente - dataMaisAntiga;
+    let d, h, m, s;
+    s = Math.floor(ms / 1000);
+    m = Math.floor(s / 60);
+    s = s % 60;
+    h = Math.floor(m / 60);
+    m = m % 60;
+    d = Math.floor(h / 24);
+    h = h % 24;
+    
+    return {
+        dias: d,
+        horas: h,
+        minutos: m,
+        segundos: s
+    };
 }
 
 class TimeStamp {
-    constructor() {
-        this.valor = formatarData(new Date());
-    }    
+    constructor(data) {
+        this.valor = formatarData(data ? data : new Date());
+    }
+    toDate() {
+        return obterData(this.valor);
+    }
+    toString() {
+        return this.valor;
+    }
+    diferenca(data) {
+        return diferenca(this.toDate(),data ? data : Date.now());
+    }
+    diferencaDescritiva() {
+        let diff = this.diferenca();
+        // {dias: 1, horas: 2, minutos: 0, segundos: 26}
+        if (diff.dias == 1) {
+            return 'Há 1 dia'
+        } else if (diff.dias > 1) {
+            return `Há ${diff.dias} dias`
+        } else if (diff.horas == 1) {
+            return 'Há 1 hora'
+        } else if (diff.horas > 1) {
+            return `Há ${diff.horas} horas`
+        } else if (diff.minutos == 1) {
+            return 'Há 1 minuto'
+        } else if (diff.minutos > 1) {
+            return `Há ${diff.minutos} minutos`
+        } else {
+            return 'Há menos de 1 minuto'
+        }
+    }
 }
 
 export default TimeStamp;

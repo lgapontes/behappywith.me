@@ -24,6 +24,11 @@ class App extends React.Component {
             `Seja bem-vind${genero} ${usuario.nome}!`
         )
     }
+    msgNovaGentileza() {
+        this.refs.toast.sucesso(
+            'Nova gentileza cadastrada!'
+        )
+    }
     renderizarNovoUsuario() {
         let usuario = this.state.usuario;        
         if (usuario) {
@@ -53,6 +58,10 @@ class App extends React.Component {
     renderizarNovaGentileza() {
         return (
             <NovaGentileza
+                onSubmit={gentileza => {                    
+                    console.log(gentileza);                        
+                    this.msgNovaGentileza();
+                }}
             />
         )   
     }

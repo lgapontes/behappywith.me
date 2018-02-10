@@ -2,21 +2,18 @@ import React from 'react'
 import Label from '../Label'
 import Gentileza from '../../models/Gentileza'
 import Destinatario from '../../models/Destinatario'
+import TimeStamp from '../../models/TimeStamp'
 import Button from '../Button'
 import ImageScroller from '../ImageScroller'
-
-import TimeStamp from '../../models/TimeStamp'
 
 class NovaGentileza extends React.Component {
     constructor(props) {
         super(props);
-
-        let teste = new TimeStamp();
-        console.log(teste.valor);
+        let gentileza = Gentileza.obterTodos()[0];
+        gentileza.destinatario = Gentileza.obterTodos()[0].obterDestinatarios()[0];
 
         this.state = {
-            gentileza: Gentileza.obterTodos()[0],
-            destinatario: Gentileza.obterTodos()[0].obterDestinatarios()[0]
+            gentileza: gentileza
         };
     }
 
@@ -32,9 +29,9 @@ class NovaGentileza extends React.Component {
                     elementos={Gentileza.obterTodos()}
                     selecionado={this.state.gentileza}
                     onChange={gentileza => {
+                        gentileza.destinatario = gentileza.obterDestinatarios()[0];
                         this.setState({                                
-                            gentileza: gentileza,
-                            destinatario: gentileza.obterDestinatarios()[0]
+                            gentileza: gentileza
                         });
                     }}
                 />
@@ -52,10 +49,12 @@ class NovaGentileza extends React.Component {
                     arquivo="img/gentilezas.png"
                     eixoY={1}
                     elementos={this.state.gentileza.obterDestinatarios()}
-                    selecionado={this.state.destinatario}
+                    selecionado={this.state.gentileza.destinatario}
                     onChange={destinatario => {
+                        let gentileza = this.state.gentileza;
+                        gentileza.destinatario = destinatario;
                         this.setState({                                
-                            destinatario: destinatario                                
+                            gentileza: gentileza                        
                         });
                     }}
                 />
@@ -69,14 +68,17 @@ class NovaGentileza extends React.Component {
                 <Button
                     texto="Cancelar"
                     onClick={e => {
-                        e.preventDefault();                            
+                        e.preventDefault();                         
                     }}
                 />
                 <Button
                     principal
                     texto="Salvar"
                     onClick={e => {
-                        e.preventDefault()                            
+                        e.preventDefault();
+                        let gentileza = this.state.gentileza;
+                        gentileza.timestamp = new TimeStamp();
+                        this.props.onSubmit(gentileza);
                     }}
                 />
             </section>
