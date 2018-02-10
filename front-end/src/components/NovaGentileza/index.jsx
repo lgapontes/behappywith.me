@@ -12,7 +12,21 @@ const BotaoCancelar = withRouter(({ history }) => (
         texto="Cancelar"
         onClick={e => {
             e.preventDefault();
-            history.push('/')                        
+            history.push('/')
+        }}
+    />
+));
+const BotaoSalvar = withRouter((props) => (
+    <Button
+        principal
+        texto="Salvar"
+        onClick={e => {
+            e.preventDefault();
+            let gentileza = props.state.gentileza;
+            gentileza.timestamp = new TimeStamp();
+            props.onSubmit(gentileza,() => {
+                props.history.push('/')
+            });
         }}
     />
 ));
@@ -72,20 +86,13 @@ class NovaGentileza extends React.Component {
             </section>
         )
     }
-
     renderizarBotoes() {
         return (
             <section>
                 <BotaoCancelar />
-                <Button
-                    principal
-                    texto="Salvar"
-                    onClick={e => {
-                        e.preventDefault();
-                        let gentileza = this.state.gentileza;
-                        gentileza.timestamp = new TimeStamp();
-                        this.props.onSubmit(gentileza);
-                    }}
+                <BotaoSalvar
+                    state={this.state}
+                    onSubmit={this.props.onSubmit}
                 />
             </section>
         )

@@ -8,7 +8,8 @@ class Usuario {
     constructor() {        
         this.nome = ''
         this.genero = ''
-        this.avatar = Avatar.obterTodos()[0]
+        this.avatar = Avatar.obterTodos()[0],
+        this.gentilezas = []
     }
 
     validarNome() {
@@ -26,7 +27,7 @@ class Usuario {
         })
     }
     toString() {
-        return `${this.nome}, ${this.avatar.toString()}`
+        return `${this.nome}, ${this.avatar.toString()}, com ${this.gentilezas.length} gentileza(s)`
     }
 
     salvar(callback) {        
@@ -43,6 +44,10 @@ class Usuario {
             );            
             sucesso(usuario);
         },falha);
+    }
+    adicionarGentileza(gentileza,callback) {
+        this.gentilezas.unshift(gentileza);
+        repository.salvar(this,callback);
     }
 }
 

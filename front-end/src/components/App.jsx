@@ -6,7 +6,6 @@ import Toast from './Toast';
 import Usuario from '../models/Usuario';
 import {
     BrowserRouter,
-    Link,
     Route,
     Switch
 } from 'react-router-dom';
@@ -84,8 +83,16 @@ class App extends React.Component {
                         )}/>
                         <Route path="/gentileza" render={() => (
                             <RenderizarNovaGentileza
-                                onSubmit={gentileza => {                        
-                                    this.msgNovaGentileza();
+                                onSubmit={(gentileza,callback) => {                                    
+                                    let usuario = this.state.usuario;                                    
+                                    usuario.adicionarGentileza(gentileza,() => {
+                                        this.setState({
+                                            usuario: usuario
+                                        }, () => {
+                                            this.msgNovaGentileza();                             
+                                            callback();
+                                        })
+                                    });
                                 }}
                             />
                         )}/>
