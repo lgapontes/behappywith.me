@@ -3,7 +3,35 @@ import Header from './Header';
 import NovoUsuario from './NovoUsuario';
 import NovaGentileza from './NovaGentileza';
 import Toast from './Toast';
-import Usuario from '../models/Usuario'
+import Usuario from '../models/Usuario';
+import {
+    BrowserRouter,
+    Link,
+    Route,
+    Switch
+} from 'react-router-dom';
+
+function teste() {
+    return (
+        <div>teste</div>
+    )
+}
+
+function RenderizarListaGentilezas(props) {
+    return (
+        <div style={{marginTop: '140px', textAlign: 'center'}}>
+            <b>Usuário obtido do <i>localStorage</i></b><br />
+            {props.usuario.toString()}
+        </div>
+    )
+}
+function RenderizarNovaGentileza(props) {
+    return (
+        <NovaGentileza
+            {...props}
+        />
+    )   
+}
 
 class App extends React.Component {
     constructor() {
@@ -30,47 +58,50 @@ class App extends React.Component {
         )
     }
     renderizarNovoUsuario() {
-        let usuario = this.state.usuario;        
-        if (usuario) {
+        return (
+            <NovoUsuario
+                onSubmit={usuario => {                        
+                    usuario.salvar(() => {
+                        this.setState({
+                            usuario: usuario
+                        }, () => {
+                            this.msgNovoUsuario(usuario)
+                        })                            
+                    });
+                }}
+                erro={msg=>this.refs.toast.erro(msg)}
+            />
+        )
+    }    
+    renderizar() {
+        let usuario = this.state.usuario;
+        if (this.state.usuario) {
             return (
-                <div style={{marginTop: '140px', textAlign: 'center'}}>
-                    <b>Usuário obtido do <i>localStorage</i></b><br />
-                    {usuario.toString()}
-                </div>
+                <BrowserRouter>
+                    <Switch>
+                        <Route exact path="/" render={() => ( 
+                            <RenderizarListaGentilezas usuario={usuario} />
+                        )}/>
+                        <Route path="/gentileza" render={() => (
+                            <RenderizarNovaGentileza
+                                onSubmit={gentileza => {                        
+                                    this.msgNovaGentileza();
+                                }}
+                            />
+                        )}/>
+                    </Switch>
+                </BrowserRouter>
             )
         } else {
-            return (
-                <NovoUsuario
-                    onSubmit={usuario => {                        
-                        usuario.salvar(() => {
-                            this.setState({
-                                usuario: usuario
-                            }, () => {
-                                this.msgNovoUsuario(usuario)
-                            })                            
-                        });
-                    }}
-                    erro={msg=>this.refs.toast.erro(msg)}
-                />
-            )
+            return this.renderizarNovoUsuario()
         }      
-    }
-    renderizarNovaGentileza() {
-        return (
-            <NovaGentileza
-                onSubmit={gentileza => {                    
-                    console.log(gentileza);                        
-                    this.msgNovaGentileza();
-                }}
-            />
-        )   
-    }
+    }    
 
     render() {
-        return (
+        return (            
             <div>
                 <Header />
-                {this.renderizarNovaGentileza()}
+                {this.renderizar()}
                 <Toast ref="toast" />
             </div>
         );

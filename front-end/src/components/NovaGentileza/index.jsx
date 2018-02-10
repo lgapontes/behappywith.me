@@ -5,6 +5,17 @@ import Destinatario from '../../models/Destinatario'
 import TimeStamp from '../../models/TimeStamp'
 import Button from '../Button'
 import ImageScroller from '../ImageScroller'
+import { withRouter } from 'react-router-dom'
+
+const BotaoCancelar = withRouter(({ history }) => (
+    <Button
+        texto="Cancelar"
+        onClick={e => {
+            e.preventDefault();
+            history.push('/')                        
+        }}
+    />
+));
 
 class NovaGentileza extends React.Component {
     constructor(props) {
@@ -65,12 +76,7 @@ class NovaGentileza extends React.Component {
     renderizarBotoes() {
         return (
             <section>
-                <Button
-                    texto="Cancelar"
-                    onClick={e => {
-                        e.preventDefault();                         
-                    }}
-                />
+                <BotaoCancelar />
                 <Button
                     principal
                     texto="Salvar"
