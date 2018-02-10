@@ -13,6 +13,7 @@ class Gentileza {
         this.descricao = descricao;
         this.xp = xp;
         this.destinatario = undefined;
+        this.timestamp = undefined;
         this.obterDestinatarios = callback;
     }
     toString() {

@@ -5,9 +5,14 @@ import Destinatario from '../../models/Destinatario'
 import Button from '../Button'
 import ImageScroller from '../ImageScroller'
 
+import TimeStamp from '../../models/TimeStamp'
+
 class NovaGentileza extends React.Component {
     constructor(props) {
         super(props);
+
+        let teste = new TimeStamp();
+        console.log(teste.valor);
 
         this.state = {
             gentileza: Gentileza.obterTodos()[0],
