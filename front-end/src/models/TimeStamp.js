@@ -46,25 +46,6 @@ function eDataValida(data) {
 }
 */
 
-function diferenca(dataMaisAntiga,dataMaisRecente) {
-    let ms = dataMaisRecente - dataMaisAntiga;
-    let d, h, m, s;
-    s = Math.floor(ms / 1000);
-    m = Math.floor(s / 60);
-    s = s % 60;
-    h = Math.floor(m / 60);
-    m = m % 60;
-    d = Math.floor(h / 24);
-    h = h % 24;
-    
-    return {
-        dias: d,
-        horas: h,
-        minutos: m,
-        segundos: s
-    };
-}
-
 class TimeStamp {
     constructor(data) {
         if (data) {
@@ -79,8 +60,26 @@ class TimeStamp {
     toString() {
         return formatarData(this.valor);
     }
+    static diferenca(dataMaisAntiga,dataMaisRecente) {
+        let ms = dataMaisRecente - dataMaisAntiga;
+        let d, h, m, s;
+        s = Math.floor(ms / 1000);
+        m = Math.floor(s / 60);
+        s = s % 60;
+        h = Math.floor(m / 60);
+        m = m % 60;
+        d = Math.floor(h / 24);
+        h = h % 24;
+        
+        return {
+            dias: d,
+            horas: h,
+            minutos: m,
+            segundos: s
+        };
+    }
     static diferencaDescritiva(dataMaisAntiga,dataMaisRecente) {
-        let diff = diferenca(dataMaisAntiga,dataMaisRecente);
+        let diff = TimeStamp.diferenca(dataMaisAntiga,dataMaisRecente);
         // {dias: 1, horas: 2, minutos: 0, segundos: 26}
         if (diff.dias == 1) {
             return '1 dia'

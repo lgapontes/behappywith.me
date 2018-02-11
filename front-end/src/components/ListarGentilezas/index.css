@@ -1,0 +1,73 @@
+div.gentileza {
+    box-sizing: border-box;
+    min-width: 300px;
+    border-bottom: 2px solid #eee;
+    margin-top: 6px;
+}
+
+div.gentileza h3.title {
+    display: inline-block;
+    font-size: 26px;
+    color: #222;
+    margin-bottom: 5px;
+    margin-top: 0;
+    line-height: 42px;
+}
+
+div.gentileza div.buttons {
+    display: block;
+    float: right;
+}
+
+div.gentileza span {        
+    font-size: 14px;
+    margin-bottom: 3px;
+    padding: 3px;
+    color: #fff;
+    display: inline-block;
+}
+
+div.gentileza span.green {
+    background-color: #00c853;
+}
+
+div.gentileza span.orange {
+    background-color: #f57c00;
+}
+
+div.gentileza span.gray {
+    background-color: #cacaca;
+}
+
+div.gentileza ul {
+    display: table;
+    margin: 0 auto;
+    list-style-type: none;
+    padding: 0;
+    border: 0;
+}
+
+div.gentileza ul li {
+    padding: 0;
+    float: left;
+}
+
+div.gentileza ul li.icone-ligacao {
+    margin-top: 36px;
+    border-radius: 50%;
+    background-color: #bbdefb;
+}
+
+div.gentileza ul li.icone-xp {
+    box-sizing: border-box;
+    line-height: 74px;
+    width: 74px;
+    border-radius: 50%;
+    background-color: #00c853;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 8px;
+    margin-left: 8px;
+}

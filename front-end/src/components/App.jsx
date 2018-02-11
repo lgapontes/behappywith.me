@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './Header';
 import NovoUsuario from './NovoUsuario';
 import NovaGentileza from './NovaGentileza';
-import ExibirGentileza from './ExibirGentileza';
+import ListarGentilezas from './ListarGentilezas';
 import NewButton from './NewButton';
 import Toast from './Toast';
 import Usuario from '../models/Usuario';
@@ -18,10 +18,10 @@ function teste() {
     )
 }
 
-function RenderizarListaGentilezas(props) {
+function RenderizarListarGentilezas(props) {
     return (
         <section>
-            <ExibirGentileza
+            <ListarGentilezas
                 gentilezas={props.usuario.gentilezas}
             />
             <NewButton />
@@ -83,7 +83,7 @@ class App extends React.Component {
                 <BrowserRouter>
                     <Switch>
                         <Route exact path="/" render={() => ( 
-                            <RenderizarListaGentilezas usuario={usuario} />
+                            <RenderizarListarGentilezas usuario={usuario} />
                         )}/>
                         <Route path="/gentileza" render={() => (
                             <RenderizarNovaGentileza

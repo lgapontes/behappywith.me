@@ -40,6 +40,21 @@ class Gentileza {
             this.dataExecucao
         );
     }
+    obterXP() {
+        let agora = new Date();
+        let redutor = 0;
+        if (this.dataLimite.toDate() < agora) {
+            let diff = TimeStamp.diferenca(this.dataLimite.toDate(),agora);
+            if (diff.dias > 0) {
+                redutor = 3;
+            } else if (diff.horas >= 12) {
+                redutor = 2;
+            } else {
+                redutor = 1;
+            }
+        }
+        return this.xp - redutor;
+    }
     static parse(json) {
         let gentileza = Gentileza.obterTodos()[json.index];
         gentileza.destinatario = Destinatario.parse(json.destinatario)        
