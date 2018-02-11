@@ -1,4 +1,5 @@
 import React from 'react';
+import ButtonImage from '../ButtonImage'
 import './index.css';
 
 class ExibirGentileza extends React.Component {
@@ -10,8 +11,34 @@ class ExibirGentileza extends React.Component {
         const classNameFrase = "green";
         return (
             <div key={key} className="gentileza">
-                <h3>{gentileza.descricao}</h3>
-                <span className={classNameFrase}>{gentileza.frase}</span>
+                <div className="title">
+                    <h3>{gentileza.descricao}</h3>
+                    <span className={classNameFrase}>{gentileza.frase.exibir()}</span>
+                </div>
+                <div className="buttons">
+                    <ButtonImage
+                        tipo="realizar-gentileza"
+
+                        onTouchStart={e => e.stopPropagation()}
+                        onTouchMove={e => e.stopPropagation()}
+                        onTouchEnd={e => e.stopPropagation()}
+
+                        onClick={e => {
+                            e.preventDefault();
+                        }}
+                    />
+                    <ButtonImage
+                        tipo="cancelar-gentileza"
+
+                        onTouchStart={e => e.stopPropagation()}
+                        onTouchMove={e => e.stopPropagation()}
+                        onTouchEnd={e => e.stopPropagation()}
+
+                        onClick={e => {
+                            e.preventDefault();
+                        }}
+                    />
+                </div>
             </div>
         )
     }

@@ -9,3 +9,26 @@ div.option-image-scroller {
 div.option-image-scroller:hover {
     background-color: #8d8d8d;
 }
+
+div.option-realizar-gentileza {
+    background-color: #bdbdbd;
+    border-radius: 50%;
+    padding: 8px;
+    margin-left: 10px;
+    float: right;
+}
+
+div.option-realizar-gentileza:hover {
+    background-color: #00c853;
+}
+
+div.option-cancelar-gentileza {
+    background-color: #bdbdbd;
+    border-radius: 50%;
+    padding: 8px;
+    float: right;
+}
+
+div.option-cancelar-gentileza:hover {
+    background-color: #f44336;
+}

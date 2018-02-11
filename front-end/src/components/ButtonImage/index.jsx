@@ -5,22 +5,38 @@ import Image from '../Image'
 export default function ButtonImage(props) {    
     let estilo = {};
     let index = 0;
-    if (props.posicao === 'direita') {
-        estilo.float = 'right'
-        index = 1
-    } else {
-        estilo.float = 'left'
-        index = 0
+    let tamanho = 30;
+    let classes = "";
+
+    if (props.tipo === "image-scroller") {
+        if (props.posicao === 'direita') {
+            estilo.float = 'right'
+            index = 1
+        } else {
+            estilo.float = 'left'
+            index = 0
+        }
+        classes = 'option-image-scroller'
     }
-    const tamanho = 30;
+    if (props.tipo === "realizar-gentileza") {
+        index = 5
+        classes = 'option-realizar-gentileza'
+        tamanho = 32
+    }
+    if (props.tipo === "cancelar-gentileza") {
+        index = 4
+        classes = 'option-cancelar-gentileza'
+        tamanho = 32
+    }
 
     let propriedades = Object.assign({},props);        
     delete propriedades.posicao;
+    delete propriedades.tipo;
 
     return (
         <div
             style={estilo}
-            className='option-image-scroller'
+            className={classes}
             {...propriedades}
         >
             <Image

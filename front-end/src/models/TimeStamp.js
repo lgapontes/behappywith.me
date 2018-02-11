@@ -63,11 +63,8 @@ class TimeStamp {
     toString() {
         return this.valor;
     }
-    diferenca(data) {
-        return diferenca(this.toDate(),data ? data : Date.now());
-    }
-    diferencaDescritiva() {
-        let diff = this.diferenca();
+    static diferencaDescritiva(dataMaisAntiga,dataMaisRecente) {
+        let diff = diferenca(dataMaisAntiga,dataMaisRecente);
         // {dias: 1, horas: 2, minutos: 0, segundos: 26}
         if (diff.dias == 1) {
             return '1 dia'
