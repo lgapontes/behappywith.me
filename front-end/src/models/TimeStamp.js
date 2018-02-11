@@ -16,6 +16,8 @@ function formatarData(date) {
     return `${dia}/${mes}/${ano} ${hora}:${minuto}:${segundo}.${mili}`;
 }
 
+/**** Funções para apoio ****/
+/*
 function obterData(str) {
     // 012345678901234567890123
     // 09/02/2018 22:04:12.196
@@ -29,6 +31,20 @@ function obterData(str) {
 
     return new Date(ano, mes-1, dia, hora, minuto, segundo, mili);
 }
+
+function eDataValida(data) {
+    if ( Object.prototype.toString.call(data) === "[object Date]" ) {
+        if ( isNaN( data.getTime() ) ) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    } else {
+        return false;
+    }
+}
+*/
 
 function diferenca(dataMaisAntiga,dataMaisRecente) {
     let ms = dataMaisRecente - dataMaisAntiga;
@@ -51,17 +67,17 @@ function diferenca(dataMaisAntiga,dataMaisRecente) {
 
 class TimeStamp {
     constructor(data) {
-        if (typeof data === 'string') {
+        if (data) {
             this.valor = data;
         } else {
-            this.valor = formatarData(new Date());
-        }        
+            this.valor = new Date();
+        }
     }
     toDate() {
-        return obterData(this.valor);
+        return this.valor;
     }
     toString() {
-        return this.valor;
+        return formatarData(this.valor);
     }
     static diferencaDescritiva(dataMaisAntiga,dataMaisRecente) {
         let diff = diferenca(dataMaisAntiga,dataMaisRecente);
@@ -82,9 +98,9 @@ class TimeStamp {
             return 'menos de 1 minuto'
         }
     }
-    static adicionarUmDia(timestamp) {
-        let data = new Date(timestamp.toDate().getTime() + 60 * 60 * 24 * 1000);
-        return new TimeStamp(formatarData(data));
+    static adicionarSeisHoras(timestamp) {
+        let data = new Date(timestamp.getTime() + 60 * 60 * 6.01 * 1000);
+        return new TimeStamp(data);
     }
 }
 

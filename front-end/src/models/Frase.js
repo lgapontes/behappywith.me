@@ -52,7 +52,7 @@ class Frase {
     constructor(indexGentileza,indexDestinatario,dataLimite,dataExecucao) {
         this.indexGentileza = indexGentileza;
         this.indexDestinatario = indexDestinatario;
-        this.agora = Date.now();
+        this.agora = new Date();
         this.dataLimite = dataLimite.toDate();
         if (dataExecucao) {
             this.dataExecucao = dataExecucao.toDate();

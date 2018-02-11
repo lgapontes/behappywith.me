@@ -32,7 +32,7 @@ class Gentileza {
     }
     inicializarDados() {
         this.dataCriacao = new TimeStamp();
-        this.dataLimite = TimeStamp.adicionarUmDia(this.dataCriacao);
+        this.dataLimite = TimeStamp.adicionarSeisHoras(this.dataCriacao.toDate());
         this.frase = new Frase(
             this.index,
             this.destinatario.index,
@@ -44,10 +44,10 @@ class Gentileza {
         let gentileza = Gentileza.obterTodos()[json.index];
         gentileza.destinatario = Destinatario.parse(json.destinatario)        
         gentileza.status = parseInt(json.status);
-        gentileza.dataCriacao = new TimeStamp(json.dataCriacao.valor);
-        gentileza.dataLimite = new TimeStamp(json.dataLimite.valor);
+        gentileza.dataCriacao = new TimeStamp(new Date(json.dataCriacao.valor));
+        gentileza.dataLimite = new TimeStamp(new Date(json.dataLimite.valor));
         if (gentileza.status > 1) {
-            gentileza.dataExecucao = new TimeStamp(json.dataExecucao.valor);
+            gentileza.dataExecucao = new TimeStamp(new Date(json.dataExecucao.valor));
         }
         gentileza.frase = new Frase(
             gentileza.index,
