@@ -11,7 +11,7 @@ div.option-image-scroller:hover {
 }
 
 div.option-realizar-gentileza {
-    background-color: #bdbdbd;
+    background-color: #00c853;
     border-radius: 50%;
     padding: 8px;
     margin-left: 6px;
@@ -19,11 +19,11 @@ div.option-realizar-gentileza {
 }
 
 div.option-realizar-gentileza:hover {
-    background-color: #00c853;
+    background-color: #068b3e;
 }
 
 div.option-gentileza-realizada {
-    background-color: #00c853;
+    background-color: #bdbdbd;
     border-radius: 50%;
     padding: 8px;
     margin-left: 6px;
@@ -31,12 +31,12 @@ div.option-gentileza-realizada {
 }
 
 div.option-cancelar-gentileza {
-    background-color: #bdbdbd;
+    background-color: #f44336;
     border-radius: 50%;
     padding: 8px;
     float: right;
 }
 
 div.option-cancelar-gentileza:hover {
-    background-color: #f44336;
+    background-color: #9c2b23;
 }

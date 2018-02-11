@@ -1,17 +1,21 @@
 div.gentileza {
     box-sizing: border-box;
     min-width: 300px;
-    border-bottom: 2px solid #eee;
+    border-bottom: 1px solid #999999;
     margin-top: 6px;
 }
 
 div.gentileza h3.title {
     display: inline-block;
     font-size: 26px;
-    color: #222;
+    color: #222222;
     margin-bottom: 5px;
     margin-top: 0;
     line-height: 42px;
+}
+
+div.gentileza h3.gray {
+    color: #444444;
 }
 
 div.gentileza div.buttons {
@@ -36,7 +40,7 @@ div.gentileza span.orange {
 }
 
 div.gentileza span.gray {
-    background-color: #cacaca;
+    background-color: #bdbdbd;
 }
 
 div.gentileza ul {
@@ -55,7 +59,7 @@ div.gentileza ul li {
 div.gentileza ul li.icone-ligacao {
     margin-top: 36px;
     border-radius: 50%;
-    background-color: #bbdefb;
+    background-color: #246794;
 }
 
 div.gentileza ul li.icone-xp {
@@ -70,4 +74,8 @@ div.gentileza ul li.icone-xp {
     text-align: center;
     margin-top: 8px;
     margin-left: 8px;
+}
+
+div.gentileza ul li.gray {
+    background-color: #bdbdbd;
 }

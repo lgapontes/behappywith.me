@@ -3,6 +3,6 @@ button.fixed-button {
     position: fixed;    
     bottom: 32px;
     padding: 0px;
-    background: #246794;
+    background-color: #246794;
     right: 32px;
 }

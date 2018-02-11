@@ -55,6 +55,19 @@ class ListarGentilezas extends React.Component {
     }
 
     renderizarIcones(gentileza) {
+        let arquivo = "";
+        let classNameIconeLigacao = "";
+        let classNameXP = "";
+        if (gentileza.estaExecutada()) {
+            arquivo = 'img/gentilezas-realizadas.png';
+            classNameIconeLigacao = "icone-ligacao gray";
+            classNameXP = "icone-xp gray";            
+        } else {
+            arquivo = 'img/gentilezas.png';
+            classNameIconeLigacao = "icone-ligacao";
+            classNameXP = "icone-xp";
+        }
+
         return (
             <ul>
                 <li>
@@ -64,10 +77,10 @@ class ListarGentilezas extends React.Component {
                         width={90}
                         height={90}
                         backgroundHeight={180}
-                        arquivo="img/gentilezas.png"
+                        arquivo={arquivo}
                     />
                 </li>
-                <li className="icone-ligacao">
+                <li className={classNameIconeLigacao}>
                     <Image
                         eixoX={3}
                         eixoY={0}
@@ -84,10 +97,10 @@ class ListarGentilezas extends React.Component {
                         width={90}
                         height={90}
                         backgroundHeight={180}
-                        arquivo="img/gentilezas.png"
+                        arquivo={arquivo}
                     />
                 </li>
-                <li className="icone-ligacao">
+                <li className={classNameIconeLigacao}>
                     <Image
                         eixoX={1}
                         eixoY={0}
@@ -97,7 +110,7 @@ class ListarGentilezas extends React.Component {
                         arquivo="img/botoes.png"
                     />
                 </li>
-                <li className="icone-xp">
+                <li className={classNameXP}>
                     +{gentileza.obterXP()}XP
                 </li>
             </ul>
@@ -107,9 +120,11 @@ class ListarGentilezas extends React.Component {
     renderizarGentileza(gentileza,index) {
         const key = `${gentileza.descricao.replace(/\s/g, "")}-${index}`;
         const classNameFrase = gentileza.frase.color;
+        const classNameH3 = gentileza.estaExecutada() ? "title gray" : "title";
+
         return (
             <div key={key} className="gentileza">
-                <h3 className="title">{gentileza.descricao}</h3>                
+                <h3 className={classNameH3}>{gentileza.descricao}</h3>                
                 {this.renderizarOpcoes(gentileza)}            
                 <span className={classNameFrase}>{gentileza.frase.exibir()}</span>
                 {this.renderizarIcones(gentileza)}
