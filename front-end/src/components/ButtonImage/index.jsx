@@ -21,12 +21,12 @@ export default function ButtonImage(props) {
     if (props.tipo === "realizar-gentileza") {
         index = 5
         classes = 'option-realizar-gentileza'
-        tamanho = 32
+        tamanho = 28
     }
     if (props.tipo === "cancelar-gentileza") {
         index = 4
         classes = 'option-cancelar-gentileza'
-        tamanho = 32
+        tamanho = 28
     }
 
     let propriedades = Object.assign({},props);        

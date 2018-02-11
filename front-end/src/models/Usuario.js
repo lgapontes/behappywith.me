@@ -48,7 +48,7 @@ class Usuario {
             } else {
                 json.gentilezas.forEach(entry => {                    
                     let gentileza = Gentileza.parse(entry);
-                    usuario.gentilezas.unshift(gentileza);
+                    usuario.gentilezas.push(gentileza);
                     count = count + 1;
                     if (count == json.gentilezas.length) {
                         sucesso(usuario);

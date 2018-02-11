@@ -8,13 +8,10 @@ class ExibirGentileza extends React.Component {
     }
     renderizarGentileza(gentileza,index) {
         const key = `${gentileza.descricao.replace(/\s/g, "")}-${index}`;
-        const classNameFrase = "green";
+        const classNameFrase = gentileza.frase.color;
         return (
             <div key={key} className="gentileza">
-                <div className="title">
-                    <h3>{gentileza.descricao}</h3>
-                    <span className={classNameFrase}>{gentileza.frase.exibir()}</span>
-                </div>
+                <h3 className="title">{gentileza.descricao}</h3>                
                 <div className="buttons">
                     <ButtonImage
                         tipo="realizar-gentileza"
@@ -39,6 +36,7 @@ class ExibirGentileza extends React.Component {
                         }}
                     />
                 </div>
+                <span className={classNameFrase}>{gentileza.frase.exibir()}</span>
             </div>
         )
     }

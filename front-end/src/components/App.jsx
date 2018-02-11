@@ -37,8 +37,8 @@ function RenderizarNovaGentileza(props) {
 }
 
 class App extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         Usuario.obter(usuario => {            
             this.state = {
                 usuario: usuario

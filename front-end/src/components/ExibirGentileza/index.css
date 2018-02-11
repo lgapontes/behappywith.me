@@ -2,20 +2,24 @@ div.gentileza {
     box-sizing: border-box;
     min-width: 300px;
     border-bottom: 1px solid #eee;
+    margin-top: 4px;
 }
 
-div.gentileza div.title {
+div.gentileza h3.title {
     display: inline-block;
-}
-
-div.gentileza div.title h3 {
-    font-size: 20px;
+    font-size: 26px;
     color: #222;
-    margin-bottom: 3px;
+    margin-bottom: 5px;
     margin-top: 0;
+    line-height: 42px;
 }
 
-div.gentileza div.title span {        
+div.gentileza div.buttons {
+    display: block;
+    float: right;
+}
+
+div.gentileza span {        
     font-size: 14px;
     margin-bottom: 3px;
     padding: 3px;
@@ -23,19 +27,14 @@ div.gentileza div.title span {
     display: inline-block;
 }
 
-div.gentileza div.title span.green {
+div.gentileza span.green {
     background-color: #00c853;
 }
 
-div.gentileza div.title span.orange {
+div.gentileza span.orange {
     background-color: #f57c00;
 }
 
-div.gentileza div.title span.gray {
+div.gentileza span.gray {
     background-color: #cacaca;
-}
-
-div.gentileza div.buttons {
-    display: block;
-    float: right;
 }

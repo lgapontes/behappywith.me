@@ -45,7 +45,6 @@ function montarInicioFrase(gentileza,destinatario,frases) {
     let frase = frases[gentileza][0] + " " +
         frases[gentileza][DESTINATARIOS[destinatario][1]] + " " +
         DESTINATARIOS[destinatario][0];
-    console.log(frase);
     return frase;
 }
 
@@ -53,32 +52,37 @@ class Frase {
     constructor(indexGentileza,indexDestinatario,dataLimite,dataExecucao) {
         this.indexGentileza = indexGentileza;
         this.indexDestinatario = indexDestinatario;
+        this.agora = Date.now();
         this.dataLimite = dataLimite.toDate();
         if (dataExecucao) {
             this.dataExecucao = dataExecucao.toDate();
+            this.color = "gray";
         } else {
             this.dataExecucao = undefined;
+            if (this.dataLimite < this.agora) {
+                this.color = "orange";
+            } else {
+                this.color = "green";
+            }
         }
     }
 
     exibir() {
-        let agora = Date.now();
-
         if (this.dataExecucao) {
             /* Já foi executada */
-            let tempo = TimeStamp.diferencaDescritiva(this.dataExecucao,agora)
+            let tempo = TimeStamp.diferencaDescritiva(this.dataExecucao,this.agora)
             let frase = `${montarInicioFrase(this.indexGentileza,this.indexDestinatario,FEITO)} há ${tempo}`;
             return frase; 
         } else {
             /* Não foi executada */
-            if (this.dataLimite < agora) {
+            if (this.dataLimite < this.agora) {
                 /* Está atrasada */
-                let tempo = TimeStamp.diferencaDescritiva(this.dataLimite,agora)
+                let tempo = TimeStamp.diferencaDescritiva(this.dataLimite,this.agora)
                 let frase = `${montarInicioFrase(this.indexGentileza,this.indexDestinatario,ATRASADO)} há ${tempo}`;
                 return frase;
             } else {
                 /* Ainda não foi feita */
-                let tempo = TimeStamp.diferencaDescritiva(agora,this.dataLimite)
+                let tempo = TimeStamp.diferencaDescritiva(this.agora,this.dataLimite)
                 let frase = `${montarInicioFrase(this.indexGentileza,this.indexDestinatario,A_FAZER)} em ${tempo}`;
                 return frase;
             }

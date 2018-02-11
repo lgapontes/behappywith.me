@@ -44,10 +44,10 @@ class Gentileza {
         let gentileza = Gentileza.obterTodos()[json.index];
         gentileza.destinatario = Destinatario.parse(json.destinatario)        
         gentileza.status = parseInt(json.status);
-        gentileza.dataCriacao = new TimeStamp(json.dataCriacao);
-        gentileza.dataLimite = new TimeStamp(json.dataLimite);
+        gentileza.dataCriacao = new TimeStamp(json.dataCriacao.valor);
+        gentileza.dataLimite = new TimeStamp(json.dataLimite.valor);
         if (gentileza.status > 1) {
-            gentileza.dataExecucao = new TimeStamp(json.dataExecucao);
+            gentileza.dataExecucao = new TimeStamp(json.dataExecucao.valor);
         }
         gentileza.frase = new Frase(
             gentileza.index,
@@ -55,8 +55,6 @@ class Gentileza {
             gentileza.dataLimite,
             gentileza.dataExecucao
         );
-
-        console.log(gentileza);
         return gentileza;
     }
     static obterTodos() {
