@@ -32,6 +32,11 @@ export default function ButtonImage(props) {
         classes = 'option-cancelar-gentileza'
         tamanho = 28
     }
+    if (props.tipo === "mais-gentilezas") {
+        index = 2
+        classes = 'option-mais-gentilezas'
+        tamanho = 28
+    }
 
     let propriedades = Object.assign({},props);        
     delete propriedades.posicao;

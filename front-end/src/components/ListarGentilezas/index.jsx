@@ -3,9 +3,15 @@ import Image from '../Image';
 import ButtonImage from '../ButtonImage';
 import './index.css';
 
+const EXIBICAO = 10;
+
 class ListarGentilezas extends React.Component {
     constructor(props) {
         super(props)
+
+        this.state = {
+            totalExibicao: EXIBICAO
+        }
     }
 
     renderizarOpcoes(gentileza) {
@@ -131,17 +137,47 @@ class ListarGentilezas extends React.Component {
             </div>
         )
     }
+    renderizarMaisGentilezas(contador) {
+        if (this.state.totalExibicao >= contador) {
+            return null
+        } else {
+            return (
+                <ButtonImage
+                    tipo="mais-gentilezas"
+    
+                    onTouchStart={e => e.stopPropagation()}
+                    onTouchMove={e => e.stopPropagation()}
+                    onTouchEnd={e => e.stopPropagation()}
+    
+                    onClick={e => {
+                        e.preventDefault();
+                        let totalExibicao = this.state.totalExibicao + EXIBICAO;
+                        this.setState({
+                            totalExibicao: totalExibicao
+                        });
+                    }}
+                />
+            )
+        }
+    }
 
     render() {
-        const lista = this.props.gentilezas.filter(entry => 
-            !entry.estaExcluida()
-        ).map(
+        let contador = 0;
+        const lista = this.props.gentilezas.filter(entry => {
+            if (entry.estaExcluida()) {
+                return false;
+            } else {
+                contador = contador + 1;
+                return true;
+            }
+        }).slice(0, this.state.totalExibicao).map(
             (entry,index) => this.renderizarGentileza(entry,index)
         );
 
         return (
             <div className="center">
-                {lista}                                
+                {lista}
+                {this.renderizarMaisGentilezas(contador)}
             </div>
         )
     }

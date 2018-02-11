@@ -40,3 +40,10 @@ div.option-cancelar-gentileza {
 div.option-cancelar-gentileza:hover {
     background-color: #9c2b23;
 }
+
+div.option-mais-gentilezas {
+    background-color: #999999;
+    padding: 8px 12px 8px 12px;    
+    display: table;
+    margin: 0 auto;
+}
