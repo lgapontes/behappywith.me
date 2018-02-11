@@ -12,17 +12,13 @@ import {
     Switch
 } from 'react-router-dom';
 
-function teste() {
-    return (
-        <div>teste</div>
-    )
-}
-
 function RenderizarListarGentilezas(props) {
     return (
         <section>
             <ListarGentilezas
                 gentilezas={props.usuario.gentilezas}
+                excluirGentileza={props.excluirGentileza}
+                executarGentileza={props.executarGentileza}
             />
             <NewButton />
         </section>
@@ -60,6 +56,16 @@ class App extends React.Component {
             'Nova gentileza cadastrada!'
         )
     }
+    msgGentilezaExcluida() {
+        this.refs.toast.sucesso(
+            'Gentileza excluída!'
+        )
+    }
+    msgGentilezaExecutada() {
+        this.refs.toast.sucesso(
+            'Gentileza realizada com sucesso!'
+        )
+    }
     renderizarNovoUsuario() {
         return (
             <NovoUsuario
@@ -83,7 +89,29 @@ class App extends React.Component {
                 <BrowserRouter>
                     <Switch>
                         <Route exact path="/" render={() => ( 
-                            <RenderizarListarGentilezas usuario={usuario} />
+                            <RenderizarListarGentilezas
+                                usuario={usuario}
+                                excluirGentileza={uid => {
+                                    let usuario = this.state.usuario;
+                                    usuario.excluirGentileza(uid,() => {
+                                        this.setState({
+                                            usuario: usuario
+                                        }, () => {
+                                            this.msgGentilezaExcluida();
+                                        })
+                                    })
+                                }}
+                                executarGentileza={uid => {
+                                    let usuario = this.state.usuario;
+                                    usuario.executarGentileza(uid,() => {
+                                        this.setState({
+                                            usuario: usuario
+                                        }, () => {
+                                            this.msgGentilezaExecutada();
+                                        })
+                                    })
+                                }}
+                            />
                         )}/>
                         <Route path="/gentileza" render={() => (
                             <RenderizarNovaGentileza

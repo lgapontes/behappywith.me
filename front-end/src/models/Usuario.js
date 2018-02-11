@@ -61,6 +61,18 @@ class Usuario {
         this.gentilezas.unshift(gentileza);
         repository.salvar(this,callback);
     }
+    excluirGentileza(uid,callback) {
+        this.gentilezas.filter(gentileza =>
+            gentileza.uid === uid
+        )[0].excluir();
+        repository.salvar(this,callback);
+    }
+    executarGentileza(uid,callback) {
+        this.gentilezas.filter(gentileza =>
+            gentileza.uid === uid
+        )[0].executar();
+        repository.salvar(this,callback);
+    }
 }
 
 export default Usuario;

@@ -22,6 +22,14 @@ div.option-realizar-gentileza:hover {
     background-color: #00c853;
 }
 
+div.option-gentileza-realizada {
+    background-color: #00c853;
+    border-radius: 50%;
+    padding: 8px;
+    margin-left: 6px;
+    float: right;
+}
+
 div.option-cancelar-gentileza {
     background-color: #bdbdbd;
     border-radius: 50%;

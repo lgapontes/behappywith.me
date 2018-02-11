@@ -24,7 +24,7 @@ div.gentileza span {
     margin-bottom: 3px;
     padding: 3px;
     color: #fff;
-    display: inline-block;
+    display: block;
 }
 
 div.gentileza span.green {

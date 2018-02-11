@@ -7,15 +7,41 @@ const EXCLUIDA = 1;
 const REALIZADA_NO_PRAZO = 2;
 const REALIZADA_COM_ATRASO = 3;
 
+// https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
+function guid() {
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+        s4() + '-' + s4() + s4() + s4();
+}
+
 function callbackTodos() {
     return Destinatario.obterTodos();
 }
 function callbackPessoas() {
     return Destinatario.obterTodasPessoas();
 }
+function calcularRedutorXP(dataLimite,data) {
+    let redutor = 0;
+    if (dataLimite < data) {
+        let diff = TimeStamp.diferenca(dataLimite,data);
+        if (diff.dias > 0) {
+            redutor = 3;
+        } else if (diff.horas >= 12) {
+            redutor = 2;
+        } else {
+            redutor = 1;
+        }
+    }
+    return redutor;
+}
 
 class Gentileza {
     constructor(index,descricao,xp,callback) {
+        this.uid = guid();
         this.index = index;
         this.descricao = descricao;
         this.xp = xp;
@@ -30,6 +56,33 @@ class Gentileza {
     toString() {
         return this.descricao;
     }
+    excluir() {
+        this.status = EXCLUIDA;
+        this.xp = 0;
+    }
+    estaExcluida() {
+        return (this.status === EXCLUIDA);
+    }
+    estaExecutada() {
+        return (this.status > EXCLUIDA);
+    }
+    executar() {
+        this.dataExecucao = new TimeStamp();
+        let redutor = 0;
+        if (this.dataExecucao.toDate() > this.dataLimite.toDate()) {
+            this.status = REALIZADA_COM_ATRASO;
+            redutor = calcularRedutorXP(this.dataLimite.toDate(),this.dataExecucao.toDate());
+        } else {
+            this.status = REALIZADA_NO_PRAZO;
+        }        
+        this.xp = this.xp - redutor;
+        this.frase = new Frase(
+            this.index,
+            this.destinatario.index,
+            this.dataLimite,
+            this.dataExecucao
+        );
+    }
     inicializarDados() {
         this.dataCriacao = new TimeStamp();
         this.dataLimite = TimeStamp.adicionarSeisHoras(this.dataCriacao.toDate());
@@ -41,19 +94,13 @@ class Gentileza {
         );
     }
     obterXP() {
-        let agora = new Date();
-        let redutor = 0;
-        if (this.dataLimite.toDate() < agora) {
-            let diff = TimeStamp.diferenca(this.dataLimite.toDate(),agora);
-            if (diff.dias > 0) {
-                redutor = 3;
-            } else if (diff.horas >= 12) {
-                redutor = 2;
-            } else {
-                redutor = 1;
-            }
+        if (this.dataExecucao) {
+            return this.xp;
+        } else {
+            let agora = new Date();
+            let redutor = calcularRedutorXP(this.dataLimite.toDate(),agora);
+            return this.xp - redutor;
         }
-        return this.xp - redutor;
     }
     static parse(json) {
         let gentileza = Gentileza.obterTodos()[json.index];
