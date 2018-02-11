@@ -41,8 +41,20 @@ class Usuario {
             usuario.avatar = new Avatar(
                 json.avatar.index,
                 json.avatar.descricao
-            );            
-            sucesso(usuario);
+            );
+            let count = 0;
+            if (json.gentilezas.length == 0) {
+                sucesso(usuario);
+            } else {
+                json.gentilezas.forEach(entry => {                    
+                    let gentileza = Gentileza.parse(entry);
+                    usuario.gentilezas.unshift(gentileza);
+                    count = count + 1;
+                    if (count == json.gentilezas.length) {
+                        sucesso(usuario);
+                    }
+                });
+            }            
         },falha);
     }
     adicionarGentileza(gentileza,callback) {

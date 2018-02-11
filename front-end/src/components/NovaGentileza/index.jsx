@@ -22,8 +22,8 @@ const BotaoSalvar = withRouter((props) => (
         texto="Salvar"
         onClick={e => {
             e.preventDefault();
-            let gentileza = props.state.gentileza;
-            gentileza.timestamp = new TimeStamp();
+            let gentileza = props.state.gentileza;            
+            gentileza.inicializarDados();
             props.onSubmit(gentileza,() => {
                 props.history.push('/')
             });
@@ -70,7 +70,7 @@ class NovaGentileza extends React.Component {
                     texto="Para quem?"
                 />
                 <ImageScroller
-                    key={`destinatarios-${this.state.gentileza.toString()}`}
+                    key={`destinatarios-${this.state.gentileza.toString().replace(/\s/g, "")}`}
                     arquivo="img/gentilezas.png"
                     eixoY={1}
                     elementos={this.state.gentileza.obterDestinatarios()}

@@ -2,6 +2,8 @@ import React from 'react';
 import Header from './Header';
 import NovoUsuario from './NovoUsuario';
 import NovaGentileza from './NovaGentileza';
+import ExibirGentileza from './ExibirGentileza';
+import NewButton from './NewButton';
 import Toast from './Toast';
 import Usuario from '../models/Usuario';
 import {
@@ -18,10 +20,12 @@ function teste() {
 
 function RenderizarListaGentilezas(props) {
     return (
-        <div style={{marginTop: '140px', textAlign: 'center'}}>
-            <b>Usuário obtido do <i>localStorage</i></b><br />
-            {props.usuario.toString()}
-        </div>
+        <section>
+            <ExibirGentileza
+                gentilezas={props.usuario.gentilezas}
+            />
+            <NewButton />
+        </section>
     )
 }
 function RenderizarNovaGentileza(props) {

@@ -1,0 +1,8 @@
+button.fixed-button {
+    border-radius: 50%;
+    position: fixed;    
+    bottom: 32px;
+    padding: 0px;
+    background: #246794;
+    right: 32px;
+}

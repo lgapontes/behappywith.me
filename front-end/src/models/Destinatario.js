@@ -1,10 +1,16 @@
 class Destinatario {
-    constructor(index,descricao) {
+    constructor(index,descricao,frase) {
         this.index = index;
         this.descricao = descricao;
     }
     toString() {
         return this.descricao;
+    }
+    static parse(json) {
+        return new Destinatario(
+            json.index,
+            json.descricao
+        );
     }
     static obterTodos() {
         let destinatarios = [

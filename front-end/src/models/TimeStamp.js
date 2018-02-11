@@ -51,7 +51,11 @@ function diferenca(dataMaisAntiga,dataMaisRecente) {
 
 class TimeStamp {
     constructor(data) {
-        this.valor = formatarData(data ? data : new Date());
+        if (typeof data === 'string') {
+            this.valor = data;
+        } else {
+            this.valor = formatarData(new Date());
+        }        
     }
     toDate() {
         return obterData(this.valor);
@@ -66,20 +70,24 @@ class TimeStamp {
         let diff = this.diferenca();
         // {dias: 1, horas: 2, minutos: 0, segundos: 26}
         if (diff.dias == 1) {
-            return 'Há 1 dia'
+            return '1 dia'
         } else if (diff.dias > 1) {
-            return `Há ${diff.dias} dias`
+            return `${diff.dias} dias`
         } else if (diff.horas == 1) {
-            return 'Há 1 hora'
+            return '1 hora'
         } else if (diff.horas > 1) {
-            return `Há ${diff.horas} horas`
+            return `${diff.horas} horas`
         } else if (diff.minutos == 1) {
-            return 'Há 1 minuto'
+            return '1 minuto'
         } else if (diff.minutos > 1) {
-            return `Há ${diff.minutos} minutos`
+            return `${diff.minutos} minutos`
         } else {
-            return 'Há menos de 1 minuto'
+            return 'menos de 1 minuto'
         }
+    }
+    static adicionarUmDia(timestamp) {
+        let data = new Date(timestamp.toDate().getTime() + 60 * 60 * 24 * 1000);
+        return new TimeStamp(formatarData(data));
     }
 }
 
