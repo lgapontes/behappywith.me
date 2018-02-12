@@ -15,6 +15,8 @@ import {
     Switch
 } from 'react-router-dom';
 
+const EXIBICAO = 10;
+
 function RenderizarListarGentilezas(props) {
     return (
         <section>
@@ -26,6 +28,9 @@ function RenderizarListarGentilezas(props) {
                 showTimeStamp={props.showTimeStamp}
                 timestamp={props.timestamp}
                 showTopScreen={props.showTopScreen}
+                uidGentileza={props.uidGentileza}
+                totalExibicao={props.totalExibicao}
+                incrementarTotalExibicao={props.incrementarTotalExibicao}
             />
             <FixedButton
                 index="3"
@@ -62,7 +67,8 @@ class App extends React.Component {
                 showTimeStamp: false,
                 timestamp: undefined,
                 showTopScreen: false,
-                uidGentileza: undefined
+                uidGentileza: undefined,
+                totalExibicao: EXIBICAO
             };            
         },() => {
             this.state = {
@@ -70,7 +76,8 @@ class App extends React.Component {
                 showTimeStamp: false,
                 timestamp: undefined,
                 showTopScreen: false,
-                uidGentileza: undefined
+                uidGentileza: undefined,
+                totalExibicao: EXIBICAO
             };            
         });
     }
@@ -108,59 +115,83 @@ class App extends React.Component {
                                 usuario={usuario}
                                 excluirGentileza={uid => {
                                     let usuario = this.state.usuario;
+                                    let totalExibicao = this.state.totalExibicao;
                                     usuario.excluirGentileza(uid,() => {
                                         this.setState({
                                             usuario: usuario,
                                             showTimeStamp: true,
                                             timestamp: (new TimeStamp()).toString(),
-                                            showTopScreen: false
+                                            showTopScreen: false,
+                                            uidGentileza: undefined,
+                                            totalExibicao: totalExibicao
                                         })
                                     })
                                 }}
                                 executarGentileza={uid => {
                                     let usuario = this.state.usuario;
+                                    let totalExibicao = this.state.totalExibicao;
                                     usuario.executarGentileza(uid,() => {
                                         this.setState({
                                             usuario: usuario,
                                             showTimeStamp: true,
                                             timestamp: (new TimeStamp()).toString(),
-                                            showTopScreen: false
+                                            showTopScreen: false,
+                                            uidGentileza: uid,
+                                            totalExibicao: totalExibicao
                                         })
                                     })
                                 }}
                                 recarregar={() => {
+                                    let totalExibicao = this.state.totalExibicao;
                                     Usuario.obter(usuario => {            
                                         this.setState({
                                             usuario: usuario,
                                             showTimeStamp: true,
                                             timestamp: (new TimeStamp()).toString(),
-                                            showTopScreen: false                                          
+                                            showTopScreen: false,
+                                            uidGentileza: undefined,
+                                            totalExibicao: totalExibicao                            
                                         });
                                     },() => {
                                         this.setState({
                                             usuario: undefined,
                                             showTimeStamp: true,
                                             timestamp: (new TimeStamp()).toString(),
-                                            showTopScreen: false
+                                            showTopScreen: false,
+                                            uidGentileza: undefined,
+                                            totalExibicao: totalExibicao
                                         });
                                     });
                                 }}
                                 showTimeStamp={this.state.showTimeStamp}
                                 showTopScreen={this.state.showTopScreen}
                                 timestamp={this.state.timestamp}
+                                uidGentileza={this.state.uidGentileza}
+                                totalExibicao={this.state.totalExibicao}
+                                incrementarTotalExibicao={() => {
+                                    let usuario = this.state.usuario;
+                                    let totalExibicao = this.state.totalExibicao;
+                                    totalExibicao = totalExibicao + EXIBICAO;
+                                    this.setState({
+                                        totalExibicao: totalExibicao
+                                    })
+                                }}
                             />
                         )}/>
                         <Route path="/gentileza" render={() => (
                             <RenderizarNovaGentileza
                                 id={Date.now()}
                                 onSubmit={(gentileza,callback) => {                                    
-                                    let usuario = this.state.usuario;                                    
+                                    let usuario = this.state.usuario;
+                                    let totalExibicao = this.state.totalExibicao;                                    
                                     usuario.adicionarGentileza(gentileza,() => {
                                         this.setState({
                                             usuario: usuario,
                                             showTimeStamp: true,
                                             timestamp: (new TimeStamp()).toString(),
-                                            showTopScreen: true
+                                            showTopScreen: true,
+                                            uidGentileza: gentileza.uid,
+                                            totalExibicao: totalExibicao
                                         }, () => {                             
                                             callback();
                                         })

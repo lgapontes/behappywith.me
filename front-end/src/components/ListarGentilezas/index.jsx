@@ -3,14 +3,11 @@ import Image from '../Image';
 import ButtonImage from '../ButtonImage';
 import './index.css';
 
-const EXIBICAO = 10;
-
 class ListarGentilezas extends React.Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            totalExibicao: EXIBICAO,
             fadeout: false 
         }
     }
@@ -126,11 +123,21 @@ class ListarGentilezas extends React.Component {
 
     renderizarGentileza(gentileza,index) {
         const key = `${gentileza.descricao.replace(/\s/g, "")}-${index}`;
+        let classNameGentileza = "";
+        if (this.props.uidGentileza === gentileza.uid) {
+            if (this.state.fadeout) {
+                classNameGentileza = "gentileza gentileza-fadeout";
+            } else {
+                classNameGentileza = "gentileza gentileza-fadein";
+            }
+        } else {
+            classNameGentileza = "gentileza"
+        }
         const classNameFrase = gentileza.frase.color;
         const classNameH3 = gentileza.estaExecutada() ? "title gray" : "title";
 
         return (
-            <div key={key} className="gentileza">
+            <div key={key} className={classNameGentileza}>
                 <h3 className={classNameH3}>{gentileza.descricao}</h3>                
                 {this.renderizarOpcoes(gentileza)}            
                 <span className={classNameFrase}>{gentileza.frase.exibir()}</span>
@@ -139,7 +146,7 @@ class ListarGentilezas extends React.Component {
         )
     }
     renderizarMaisGentilezas(contador) {
-        if (this.state.totalExibicao >= contador) {
+        if (this.props.totalExibicao >= contador) {
             return null
         } else {
             return (
@@ -152,10 +159,7 @@ class ListarGentilezas extends React.Component {
     
                     onClick={e => {
                         e.preventDefault();
-                        let totalExibicao = this.state.totalExibicao + EXIBICAO;
-                        this.setState({
-                            totalExibicao: totalExibicao
-                        });
+                        this.props.incrementarTotalExibicao();
                     }}
                 />
             )
@@ -187,7 +191,7 @@ class ListarGentilezas extends React.Component {
                 this.setState({
                     fadeout: true
                 });
-            },3000);            
+            },1000);            
         }
         if (this.props.showTopScreen) {
             window.scrollTo(0, 0);
@@ -203,7 +207,7 @@ class ListarGentilezas extends React.Component {
                 contador = contador + 1;
                 return true;
             }
-        }).slice(0, this.state.totalExibicao).map(
+        }).slice(0, this.props.totalExibicao).map(
             (entry,index) => this.renderizarGentileza(entry,index)
         );
 
