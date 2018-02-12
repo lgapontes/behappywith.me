@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from '../Image';
 import ButtonImage from '../ButtonImage';
+import TimeStamp from '../../models/TimeStamp';
 import './index.css';
 
 const EXIBICAO = 10;
@@ -10,7 +11,9 @@ class ListarGentilezas extends React.Component {
         super(props)
 
         this.state = {
-            totalExibicao: EXIBICAO
+            totalExibicao: EXIBICAO,
+            fadeout: false,
+            timestamp: undefined
         }
     }
 
@@ -161,6 +164,31 @@ class ListarGentilezas extends React.Component {
         }
     }
 
+    renderizarTimestamp() {
+        if (this.props.showTimeStamp) {
+            let timestamp = this.state.timestamp ? this.state.timestamp : (new TimeStamp()).toString();
+            let className = "";
+            if (this.state.fadeout) {
+                className = "timestamp timestamp-fadeout pure-menu pure-menu-horizontal pure-menu-fixed";
+            } else {
+                className = "timestamp pure-menu pure-menu-horizontal pure-menu-fixed";
+                setTimeout(() => {
+                    this.setState({
+                        fadeout: true,
+                        timestamp: timestamp
+                    });
+                },1000);
+            }             
+            return (
+                <div className={className}>
+                    Atualizado em {timestamp}
+                </div>
+            )
+        } else {
+            return null
+        }
+    }
+
     render() {
         let contador = 0;
         const lista = this.props.gentilezas.filter(entry => {
@@ -176,6 +204,7 @@ class ListarGentilezas extends React.Component {
 
         return (
             <div className="center">
+                {this.renderizarTimestamp()}
                 {lista}
                 {this.renderizarMaisGentilezas(contador)}
             </div>

@@ -3,7 +3,7 @@ import Header from './Header';
 import NovoUsuario from './NovoUsuario';
 import NovaGentileza from './NovaGentileza';
 import ListarGentilezas from './ListarGentilezas';
-import NewButton from './NewButton';
+import FixedButton from './FixedButton';
 import Toast from './Toast';
 import Usuario from '../models/Usuario';
 import {
@@ -16,11 +16,22 @@ function RenderizarListarGentilezas(props) {
     return (
         <section>
             <ListarGentilezas
+                key={props.id}
                 gentilezas={props.usuario.gentilezas}
                 excluirGentileza={props.excluirGentileza}
                 executarGentileza={props.executarGentileza}
+                showTimeStamp={props.showTimeStamp}
             />
-            <NewButton />
+            <FixedButton
+                index="3"
+                type="primary"
+                url="/gentileza"
+            />
+            <FixedButton
+                index="7"
+                type="secondary"
+                onClick={props.recarregar}
+            />
         </section>
     )
 }
@@ -37,11 +48,13 @@ class App extends React.Component {
         super(props)
         Usuario.obter(usuario => {            
             this.state = {
-                usuario: usuario
+                usuario: usuario,
+                showTimeStamp: 0
             };            
         },() => {
             this.state = {
-                usuario: undefined
+                usuario: undefined,
+                showTimeStamp: false
             };            
         });
     }
@@ -90,6 +103,7 @@ class App extends React.Component {
                     <Switch>
                         <Route exact path="/" render={() => ( 
                             <RenderizarListarGentilezas
+                                id={Date.now()}
                                 usuario={usuario}
                                 excluirGentileza={uid => {
                                     let usuario = this.state.usuario;
@@ -111,6 +125,20 @@ class App extends React.Component {
                                         })
                                     })
                                 }}
+                                recarregar={() => {
+                                    Usuario.obter(usuario => {            
+                                        this.setState({
+                                            usuario: usuario,
+                                            showTimeStamp: true
+                                        });
+                                    },() => {
+                                        this.setState({
+                                            usuario: undefined,
+                                            showTimeStamp: true
+                                        });
+                                    });
+                                }}
+                                showTimeStamp={this.state.showTimeStamp}
                             />
                         )}/>
                         <Route path="/gentileza" render={() => (

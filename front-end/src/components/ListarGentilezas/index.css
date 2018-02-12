@@ -1,3 +1,23 @@
+div.timestamp {
+    box-sizing: border-box;
+    min-width: 320px;
+    background-color: #246794;
+    text-align: center;
+    color: #ffffff;
+    font-size: 14px;
+    margin-top: 92px;
+
+    opacity: 1;
+}
+
+div.timestamp-fadeout {
+    -webkit-transition: opacity 3s ease-in-out;
+    -moz-transition: opacity 3s ease-in-out;
+    -ms-transition: opacity 3s ease-in-out;
+    -o-transition: opacity 3s ease-in-out;
+    opacity: 0;
+}
+
 div.gentileza {
     box-sizing: border-box;
     min-width: 300px;
@@ -78,4 +98,16 @@ div.gentileza ul li.icone-xp {
 
 div.gentileza ul li.gray {
     background-color: #bdbdbd;
+}
+
+@media (max-width: 992px) {
+    div.timestamp {
+        margin-top: 78px;
+    }
+}
+
+@media (max-width: 600px) {
+    div.timestamp {
+        margin-top: 62px;
+    }    
 }

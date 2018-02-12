@@ -11,9 +11,8 @@ function formatarData(date) {
     let hora = pad(date.getHours(),2);
     let minuto = pad(date.getMinutes(),2);
     let segundo = pad(date.getSeconds(),2);
-    let mili = pad(date.getMilliseconds(),3);
 
-    return `${dia}/${mes}/${ano} ${hora}:${minuto}:${segundo}.${mili}`;
+    return `${hora}:${minuto}:${segundo} de ${dia}/${mes}/${ano}`;
 }
 
 /**** Funções para apoio ****/

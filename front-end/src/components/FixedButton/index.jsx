@@ -3,17 +3,24 @@ import Image from '../Image'
 import './index.css'
 import { withRouter } from 'react-router-dom'
 
-const NewButton = withRouter(props => {
+const FixedButton = withRouter(props => {
+    let type = props.type ? props.type : "primary";
+    const className = `fixed-button ${type} pure-button`;
+
     return (
         <button
-            className="fixed-button pure-button"
+            className={className}
             onClick={(e) => {
                 e.preventDefault();
-                props.history.push('/gentileza');
+                if (props.url) {
+                    props.history.push(props.url);
+                } else {
+                    props.onClick();
+                }            
             }}
         >
             <Image
-                eixoX={3}
+                eixoX={props.index}
                 eixoY={0}
                 width={48}
                 height={48}
@@ -24,4 +31,4 @@ const NewButton = withRouter(props => {
     )
 })
 
-export default NewButton;
+export default FixedButton;
