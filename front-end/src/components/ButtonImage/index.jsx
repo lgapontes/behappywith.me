@@ -37,6 +37,11 @@ export default function ButtonImage(props) {
         classes = 'option-mais-gentilezas'
         tamanho = 28
     }
+    if (props.tipo === "header-menu") {
+        index = 6
+        classes = 'option-header-menu'
+        tamanho = 48
+    }
 
     let propriedades = Object.assign({},props);        
     delete propriedades.posicao;

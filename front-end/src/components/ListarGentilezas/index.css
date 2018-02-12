@@ -6,6 +6,7 @@ div.timestamp {
     color: #ffffff;
     font-size: 14px;
     margin-top: 92px;
+    padding: 2px 0 2px 0;
 
     opacity: 1;
 }
