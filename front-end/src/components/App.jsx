@@ -3,6 +3,7 @@ import Header from './Header';
 import NovoUsuario from './NovoUsuario';
 import NovaGentileza from './NovaGentileza';
 import ListarGentilezas from './ListarGentilezas';
+import PerfilUsuario from './PerfilUsuario';
 import FixedButton from './FixedButton';
 import Toast from './Toast';
 import Usuario from '../models/Usuario';
@@ -154,6 +155,11 @@ class App extends React.Component {
                                         })
                                     });
                                 }}
+                            />
+                        )}/>
+                        <Route path="/perfil" render={() => (
+                            <PerfilUsuario
+                                usuario={this.state.usuario}
                             />
                         )}/>
                     </Switch>

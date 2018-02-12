@@ -66,6 +66,12 @@ class Gentileza {
     estaExecutada() {
         return (this.status > EXCLUIDA);
     }
+    foiExecutadaComAtraso() {
+        if (this.estaExecutada()) {
+            return this.status == REALIZADA_COM_ATRASO;
+        }
+        return false;
+    }
     executar() {
         this.dataExecucao = new TimeStamp();
         let redutor = 0;

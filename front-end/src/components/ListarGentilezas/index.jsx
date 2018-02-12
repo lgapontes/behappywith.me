@@ -120,7 +120,7 @@ class ListarGentilezas extends React.Component {
                     />
                 </li>
                 <li className={classNameXP}>
-                    +{gentileza.obterXP()}XP
+                    +{gentileza.obterXP()}xp
                 </li>
             </ul>
         )

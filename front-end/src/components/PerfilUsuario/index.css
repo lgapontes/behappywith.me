@@ -1,0 +1,42 @@
+section.header-perfil h2 {
+    margin: 0px;
+    margin-bottom: 4px;
+}
+
+section.header-perfil div {
+    box-sizing: border-box;
+    display: block;
+    min-width: 140px;
+    margin-bottom: 10px;
+}
+
+section.header-perfil div.left {    
+    float: left;
+}
+
+section.header-perfil hr {    
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+    clear: both;
+    margin-bottom: 0;
+}
+
+section.header-perfil div.right {    
+    float: right;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background-color: #00c853;
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 54px;
+}
+
+section.labels-perfil h4 {
+    margin: 6px 0 0 0;
+}
