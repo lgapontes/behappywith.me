@@ -22,11 +22,14 @@ export default function PerfilUsuario(props) {
     let totalGentilezas = props.usuario.gentilezas.length;
     let totalAtrasadas = 0;
     let totalExcluidas = 0;
-    
+    let totalRealizadasNoPrazo = 0;
+
     let totalXP = props.usuario.gentilezas.filter(entry => {
         if (entry.estaExecutada()) {
             if (entry.foiExecutadaComAtraso()) {
                 totalAtrasadas = totalAtrasadas + 1;
+            } else {
+                totalRealizadasNoPrazo = totalRealizadasNoPrazo + 1;
             }
             return true;
         } else {
@@ -38,8 +41,6 @@ export default function PerfilUsuario(props) {
     }).reduce((xp,entry) => {
         return xp + entry.obterXP() 
     }, 0);
-
-    let totalRealizadas = totalGentilezas - (totalAtrasadas + totalExcluidas);
 
     let xp = "";
     if (totalXP > 1000) {
@@ -71,7 +72,7 @@ export default function PerfilUsuario(props) {
                 <h4>Total de {totalGentilezas} {texto(totalGentilezas)}</h4>
                 <h4>Atrasou na realização de {totalAtrasadas} {texto(totalAtrasadas)}</h4>
                 <h4>Cancelou {totalExcluidas} {texto(totalExcluidas)}</h4>
-                <h4>Realizou {totalRealizadas} {texto(totalRealizadas)} no prazo</h4>
+                <h4>Realizou {totalRealizadasNoPrazo} {texto(totalRealizadasNoPrazo)} no prazo</h4>
             </section>
             <FixedButton
                 index="0"

@@ -7,7 +7,7 @@ class Toast extends React.Component {
         toast.success(msg)
     }
     info(msg) {
-        toast.info(msg)
+        toast.info(msg,{autoClose: 10000})
     }
     erro(msg) {
         toast.error(msg)

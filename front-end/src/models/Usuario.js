@@ -33,6 +33,9 @@ class Usuario {
     salvar(callback) {        
         repository.salvar(this,callback);
     }
+    salvarComInclusaoDeGentileza(gentileza,callback) {        
+        this.adicionarGentileza(gentileza,callback);    
+    }
     static obter(sucesso,falha) {
         repository.obter(json => {
             let usuario = new Usuario();

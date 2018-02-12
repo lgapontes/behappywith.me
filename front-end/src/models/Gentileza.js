@@ -18,6 +18,10 @@ function guid() {
         s4() + '-' + s4() + s4() + s4();
 }
 
+function numeroAleatorio(length) {
+    return Math.floor(Math.random() * length);
+}
+
 function callbackTodos() {
     return Destinatario.obterTodos();
 }
@@ -108,6 +112,13 @@ class Gentileza {
             return this.xp - redutor;
         }
     }
+    temMaisDeUmDia() {
+        let diff = TimeStamp.diferenca(this.dataCriacao.toDate(),new Date());        
+        if (diff.dias > 0) {
+            return true;
+        }
+        return false;
+    }
     static parse(json) {
         let gentileza = Gentileza.obterTodos()[json.index];
         gentileza.destinatario = Destinatario.parse(json.destinatario)        
@@ -136,6 +147,16 @@ class Gentileza {
             new Gentileza(6,"Presente",20,callbackTodos)
         ];
         return gentilezas;
+    }
+    static criarGentilezaAleatoria() {
+        let gentilezas = Gentileza.obterTodos();
+        let indexGentileza = numeroAleatorio(gentilezas.length);
+        let gentileza = gentilezas[indexGentileza];
+        let destinatarios = gentileza.obterDestinatarios();
+        let indexDestinatario = numeroAleatorio(destinatarios.length);
+        gentileza.destinatario = destinatarios[indexDestinatario];
+        gentileza.inicializarDados();
+        return gentileza;
     }
 }
 
