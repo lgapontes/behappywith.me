@@ -51,10 +51,12 @@ div.option-mais-gentilezas {
 div.option-header-menu {
     box-sizing: border-box;
     height: 92px;
-    float: right;
-    margin: 0;
     background-color: #2c80b9;
     padding: 22px 22px 0 22px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 3;
 }
 
 div.option-header-menu:hover {

@@ -5,6 +5,7 @@ import NovaGentileza from './NovaGentileza';
 import ListarGentilezas from './ListarGentilezas';
 import PerfilUsuario from './PerfilUsuario';
 import FixedButton from './FixedButton';
+import ButtonImage from './ButtonImage'
 import Toast from './Toast';
 import Usuario from '../models/Usuario';
 import {
@@ -32,6 +33,10 @@ function RenderizarListarGentilezas(props) {
                 index="7"
                 type="secondary"
                 onClick={props.recarregar}
+            />
+            <ButtonImage                    
+                tipo="header-menu"
+                url="/perfil"
             />
         </section>
     )
@@ -100,7 +105,7 @@ class App extends React.Component {
         let usuario = this.state.usuario;
         if (this.state.usuario) {
             return (
-                <BrowserRouter>
+                <BrowserRouter>                
                     <Switch>
                         <Route exact path="/" render={() => ( 
                             <RenderizarListarGentilezas
@@ -171,7 +176,7 @@ class App extends React.Component {
     }    
 
     render() {
-        return (            
+        return (                        
             <div>
                 <Header />
                 {this.renderizar()}

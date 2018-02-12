@@ -1,8 +1,9 @@
 import React from 'react'
 import './index.css'
 import Image from '../Image'
+import { withRouter } from 'react-router-dom'
 
-export default function ButtonImage(props) {    
+const ButtonImage= withRouter(props => {    
     let estilo = {};
     let index = 0;
     let tamanho = 30;
@@ -47,6 +48,22 @@ export default function ButtonImage(props) {
     delete propriedades.posicao;
     delete propriedades.tipo;
     delete propriedades.readOnly;
+    
+    if (props.tipo === "header-menu") {
+        propriedades.onTouchStart = (e) => {e.stopPropagation()}
+        propriedades.onTouchMove = (e) => {e.stopPropagation()}
+        propriedades.onTouchEnd = (e) => {e.stopPropagation()}
+        propriedades.onClick = (e) => {
+            e.preventDefault();
+            console.log(props.url);
+            props.history.push(props.url);
+        }
+    }
+    delete propriedades.url;
+    delete propriedades.match;
+    delete propriedades.location;
+    delete propriedades.history;
+    delete propriedades.staticContext;
 
     return (
         <div
@@ -64,4 +81,6 @@ export default function ButtonImage(props) {
             />
         </div>
     )
-}
+})
+
+export default ButtonImage;
