@@ -8,6 +8,7 @@ import FixedButton from './FixedButton';
 import ButtonImage from './ButtonImage'
 import Toast from './Toast';
 import Usuario from '../models/Usuario';
+import TimeStamp from '../models/TimeStamp';
 import {
     BrowserRouter,
     Route,
@@ -23,6 +24,8 @@ function RenderizarListarGentilezas(props) {
                 excluirGentileza={props.excluirGentileza}
                 executarGentileza={props.executarGentileza}
                 showTimeStamp={props.showTimeStamp}
+                timestamp={props.timestamp}
+                showTopScreen={props.showTopScreen}
             />
             <FixedButton
                 index="3"
@@ -41,9 +44,10 @@ function RenderizarListarGentilezas(props) {
         </section>
     )
 }
-function RenderizarNovaGentileza(props) {
+function RenderizarNovaGentileza(props) {    
     return (
         <NovaGentileza
+            key={props.id}
             {...props}
         />
     )   
@@ -55,12 +59,18 @@ class App extends React.Component {
         Usuario.obter(usuario => {            
             this.state = {
                 usuario: usuario,
-                showTimeStamp: 0
+                showTimeStamp: false,
+                timestamp: undefined,
+                showTopScreen: false,
+                uidGentileza: undefined
             };            
         },() => {
             this.state = {
                 usuario: undefined,
-                showTimeStamp: false
+                showTimeStamp: false,
+                timestamp: undefined,
+                showTopScreen: false,
+                uidGentileza: undefined
             };            
         });
     }
@@ -68,21 +78,6 @@ class App extends React.Component {
         let genero = usuario.genero == 'm' ? 'o' : 'a';
         this.refs.toast.sucesso(
             `Seja bem-vind${genero} ${usuario.nome}!`
-        )
-    }
-    msgNovaGentileza() {
-        this.refs.toast.sucesso(
-            'Nova gentileza cadastrada!'
-        )
-    }
-    msgGentilezaExcluida() {
-        this.refs.toast.sucesso(
-            'Gentileza excluída!'
-        )
-    }
-    msgGentilezaExecutada() {
-        this.refs.toast.sucesso(
-            'Gentileza realizada com sucesso!'
         )
     }
     renderizarNovoUsuario() {
@@ -115,9 +110,10 @@ class App extends React.Component {
                                     let usuario = this.state.usuario;
                                     usuario.excluirGentileza(uid,() => {
                                         this.setState({
-                                            usuario: usuario
-                                        }, () => {
-                                            this.msgGentilezaExcluida();
+                                            usuario: usuario,
+                                            showTimeStamp: true,
+                                            timestamp: (new TimeStamp()).toString(),
+                                            showTopScreen: false
                                         })
                                     })
                                 }}
@@ -125,9 +121,10 @@ class App extends React.Component {
                                     let usuario = this.state.usuario;
                                     usuario.executarGentileza(uid,() => {
                                         this.setState({
-                                            usuario: usuario
-                                        }, () => {
-                                            this.msgGentilezaExecutada();
+                                            usuario: usuario,
+                                            showTimeStamp: true,
+                                            timestamp: (new TimeStamp()).toString(),
+                                            showTopScreen: false
                                         })
                                     })
                                 }}
@@ -135,27 +132,36 @@ class App extends React.Component {
                                     Usuario.obter(usuario => {            
                                         this.setState({
                                             usuario: usuario,
-                                            showTimeStamp: true
+                                            showTimeStamp: true,
+                                            timestamp: (new TimeStamp()).toString(),
+                                            showTopScreen: false                                          
                                         });
                                     },() => {
                                         this.setState({
                                             usuario: undefined,
-                                            showTimeStamp: true
+                                            showTimeStamp: true,
+                                            timestamp: (new TimeStamp()).toString(),
+                                            showTopScreen: false
                                         });
                                     });
                                 }}
                                 showTimeStamp={this.state.showTimeStamp}
+                                showTopScreen={this.state.showTopScreen}
+                                timestamp={this.state.timestamp}
                             />
                         )}/>
                         <Route path="/gentileza" render={() => (
                             <RenderizarNovaGentileza
+                                id={Date.now()}
                                 onSubmit={(gentileza,callback) => {                                    
                                     let usuario = this.state.usuario;                                    
                                     usuario.adicionarGentileza(gentileza,() => {
                                         this.setState({
-                                            usuario: usuario
-                                        }, () => {
-                                            this.msgNovaGentileza();                             
+                                            usuario: usuario,
+                                            showTimeStamp: true,
+                                            timestamp: (new TimeStamp()).toString(),
+                                            showTopScreen: true
+                                        }, () => {                             
                                             callback();
                                         })
                                     });

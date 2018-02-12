@@ -11,10 +11,10 @@ div.timestamp {
 }
 
 div.timestamp-fadeout {
-    -webkit-transition: opacity 3s ease-in-out;
-    -moz-transition: opacity 3s ease-in-out;
-    -ms-transition: opacity 3s ease-in-out;
-    -o-transition: opacity 3s ease-in-out;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -ms-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
     opacity: 0;
 }
 
@@ -23,6 +23,18 @@ div.gentileza {
     min-width: 300px;
     border-bottom: 1px solid #999999;
     margin-top: 6px;
+}
+
+div.gentileza-fadein {
+    background-color: #90eeb7;
+}
+
+div.gentileza-fadeout {
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -ms-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    background-color: #ffffff;
 }
 
 div.gentileza h3.title {

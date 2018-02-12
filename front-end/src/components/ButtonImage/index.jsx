@@ -55,7 +55,6 @@ const ButtonImage= withRouter(props => {
         propriedades.onTouchEnd = (e) => {e.stopPropagation()}
         propriedades.onClick = (e) => {
             e.preventDefault();
-            console.log(props.url);
             props.history.push(props.url);
         }
     }

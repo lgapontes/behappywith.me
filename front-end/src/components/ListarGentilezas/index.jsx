@@ -1,7 +1,6 @@
 import React from 'react';
 import Image from '../Image';
 import ButtonImage from '../ButtonImage';
-import TimeStamp from '../../models/TimeStamp';
 import './index.css';
 
 const EXIBICAO = 10;
@@ -12,8 +11,7 @@ class ListarGentilezas extends React.Component {
 
         this.state = {
             totalExibicao: EXIBICAO,
-            fadeout: false,
-            timestamp: undefined
+            fadeout: false 
         }
     }
 
@@ -166,18 +164,12 @@ class ListarGentilezas extends React.Component {
 
     renderizarTimestamp() {
         if (this.props.showTimeStamp) {
-            let timestamp = this.state.timestamp ? this.state.timestamp : (new TimeStamp()).toString();
+            let timestamp = this.props.timestamp;
             let className = "";
             if (this.state.fadeout) {
                 className = "timestamp timestamp-fadeout pure-menu pure-menu-horizontal pure-menu-fixed";
             } else {
-                className = "timestamp pure-menu pure-menu-horizontal pure-menu-fixed";
-                setTimeout(() => {
-                    this.setState({
-                        fadeout: true,
-                        timestamp: timestamp
-                    });
-                },1000);
+                className = "timestamp pure-menu pure-menu-horizontal pure-menu-fixed";                
             }             
             return (
                 <div className={className}>
@@ -186,6 +178,19 @@ class ListarGentilezas extends React.Component {
             )
         } else {
             return null
+        }
+    }
+
+    componentDidMount() {
+        if (this.props.showTimeStamp && !this.state.fadeout) {
+            setTimeout(() => {
+                this.setState({
+                    fadeout: true
+                });
+            },3000);            
+        }
+        if (this.props.showTopScreen) {
+            window.scrollTo(0, 0);
         }
     }
 
