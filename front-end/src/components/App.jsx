@@ -32,6 +32,7 @@ function RenderizarListarGentilezas(props) {
                 uidGentileza={props.uidGentileza}
                 totalExibicao={props.totalExibicao}
                 incrementarTotalExibicao={props.incrementarTotalExibicao}
+                disableFadeout={props.disableFadeout}
             />
             <FixedButton
                 index="3"
@@ -69,7 +70,8 @@ class App extends React.Component {
                 timestamp: undefined,
                 showTopScreen: false,
                 uidGentileza: undefined,
-                totalExibicao: EXIBICAO
+                totalExibicao: EXIBICAO,
+                disableFadeout: false
             };            
         },() => {
             this.state = {
@@ -78,7 +80,8 @@ class App extends React.Component {
                 timestamp: undefined,
                 showTopScreen: false,
                 uidGentileza: undefined,
-                totalExibicao: EXIBICAO
+                totalExibicao: EXIBICAO,
+                disableFadeout: false
             };            
         });
     }
@@ -128,7 +131,8 @@ class App extends React.Component {
                                         timestamp: (new TimeStamp()).toString(),
                                         showTopScreen: false,
                                         uidGentileza: undefined,
-                                        totalExibicao: totalExibicao
+                                        totalExibicao: totalExibicao,
+                                        disableFadeout: false
                                     })
                                 })
                             }}
@@ -142,7 +146,8 @@ class App extends React.Component {
                                         timestamp: (new TimeStamp()).toString(),
                                         showTopScreen: false,
                                         uidGentileza: uid,
-                                        totalExibicao: totalExibicao
+                                        totalExibicao: totalExibicao,
+                                        disableFadeout: false
                                     })
                                 })
                             }}
@@ -155,7 +160,8 @@ class App extends React.Component {
                                         timestamp: (new TimeStamp()).toString(),
                                         showTopScreen: false,
                                         uidGentileza: undefined,
-                                        totalExibicao: totalExibicao                            
+                                        totalExibicao: totalExibicao,
+                                        disableFadeout: false                            
                                     });
                                 },() => {
                                     this.setState({
@@ -164,7 +170,8 @@ class App extends React.Component {
                                         timestamp: (new TimeStamp()).toString(),
                                         showTopScreen: false,
                                         uidGentileza: undefined,
-                                        totalExibicao: totalExibicao
+                                        totalExibicao: totalExibicao,
+                                        disableFadeout: false
                                     });
                                 });
                             }}
@@ -181,6 +188,7 @@ class App extends React.Component {
                                     totalExibicao: totalExibicao
                                 })
                             }}
+                            disableFadeout={this.state.disableFadeout}
                         />
                     )}/>
                     <Route path="/gentileza" render={() => (
@@ -196,7 +204,8 @@ class App extends React.Component {
                                         timestamp: (new TimeStamp()).toString(),
                                         showTopScreen: true,
                                         uidGentileza: gentileza.uid,
-                                        totalExibicao: totalExibicao
+                                        totalExibicao: totalExibicao,
+                                        disableFadeout: false
                                     }, () => {                             
                                         callback();
                                     })
@@ -207,6 +216,13 @@ class App extends React.Component {
                     <Route path="/perfil" render={() => (
                         <PerfilUsuario
                             usuario={this.state.usuario}
+                            onDisableFadeout={callback => {
+                                this.setState({
+                                    disableFadeout: true
+                                }, () => {                             
+                                    callback();
+                                })
+                            }}
                         />
                     )}/>
                 </Switch>
@@ -227,7 +243,8 @@ class App extends React.Component {
                 timestamp: (new TimeStamp()).toString(),
                 showTopScreen: true,
                 uidGentileza: gentileza.uid,
-                totalExibicao: totalExibicao
+                totalExibicao: totalExibicao,
+                disableFadeout: false
             }, () => {                             
                 this.refs.toast.info(
                     'Você ganhou um novo agendamento de gentileza! '

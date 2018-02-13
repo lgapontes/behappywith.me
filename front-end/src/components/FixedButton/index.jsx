@@ -12,7 +12,12 @@ const FixedButton = withRouter(props => {
             className={className}
             onClick={(e) => {
                 e.preventDefault();
-                if (props.url) {
+
+                if (props.url && props.onClick) {
+                    props.onClick(() => {
+                        props.history.push(props.url);    
+                    });
+                } else if (props.url) {
                     props.history.push(props.url);
                 } else {
                     props.onClick();

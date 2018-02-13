@@ -5,7 +5,7 @@ export default function GenderSelector(props) {
     const masculino = props.genero==='m';
     const feminino = props.genero==='f';
 
-    const cor = props.valorInvalido ? '#d50000' : '#cccccc';
+    const cor = props.valorInvalido ? '#f44336' : '#cccccc';
     const estilo = {
         boxSizing: 'border-box',
         border: `1px solid ${cor}`,

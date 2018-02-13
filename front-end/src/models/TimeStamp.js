@@ -92,8 +92,12 @@ class TimeStamp {
             return '1 minuto'
         } else if (diff.minutos > 1) {
             return `${diff.minutos} minutos`
+        } else if (diff.segundos == 0) {
+            return '1 segundo'
+        } else if (diff.segundos == 1) {
+            return '1 segundo'
         } else {
-            return 'menos de 1 minuto'
+            return `${diff.segundos} segundos`
         }
     }
     static adicionarSeisHoras(timestamp) {

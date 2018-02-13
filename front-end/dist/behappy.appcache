@@ -1,10 +1,12 @@
 CACHE MANIFEST
-# v0.0.1
+# v0.0.3
 
 CACHE:
 bundle.js
 style.css
 img/avatars.png
+img/gentilezas.png
+img/gentilezas-realizadas.png
 img/botoes.png
 img/favicon.ico
 img/logo.png

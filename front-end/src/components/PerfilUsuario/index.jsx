@@ -78,6 +78,9 @@ export default function PerfilUsuario(props) {
                 index="0"
                 type="secondary"
                 url="/"
+                onClick={callback => {
+                    props.onDisableFadeout(callback)
+                }}
             />
         </div>
     )

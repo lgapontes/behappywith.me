@@ -124,7 +124,7 @@ class ListarGentilezas extends React.Component {
     renderizarGentileza(gentileza,index) {
         const key = `${gentileza.descricao.replace(/\s/g, "")}-${index}`;
         let classNameGentileza = "";
-        if (this.props.uidGentileza === gentileza.uid) {
+        if (this.props.uidGentileza === gentileza.uid && !this.props.disableFadeout) {
             if (this.state.fadeout) {
                 classNameGentileza = "gentileza gentileza-fadeout";
             } else {
@@ -167,7 +167,7 @@ class ListarGentilezas extends React.Component {
     }
 
     renderizarTimestamp() {
-        if (this.props.showTimeStamp) {
+        if (this.props.showTimeStamp && !this.props.disableFadeout) {
             let timestamp = this.props.timestamp;
             let className = "";
             if (this.state.fadeout) {
@@ -185,8 +185,8 @@ class ListarGentilezas extends React.Component {
         }
     }
 
-    componentDidMount() {
-        if (this.props.showTimeStamp && !this.state.fadeout) {
+    componentDidMount() {        
+        if (this.props.showTimeStamp && !this.state.fadeout && !this.props.disableFadeout) {
             setTimeout(() => {
                 this.setState({
                     fadeout: true

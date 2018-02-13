@@ -24,6 +24,7 @@ div.gentileza {
     border-bottom: 1px solid #999999;
     margin-top: 6px;
     background-color: #ffffff;
+    padding-top: 3px;    
 }
 
 div.gentileza-fadein {
@@ -31,7 +32,7 @@ div.gentileza-fadein {
     -moz-transition: background-color 1s ease-in-out;
     -ms-transition: background-color 1s ease-in-out;
     -o-transition: background-color 1s ease-in-out;
-    background-color: #bbdefb;
+    background-color: #ccff90;
 }
 
 div.gentileza-fadeout {
