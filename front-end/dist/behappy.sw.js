@@ -1,10 +1,12 @@
 var identificador = 'behappy.sw';
-var versao = 3;
+var versao = 4;
 var idAtual = identificador + '-' + versao;
 var idAnterior = identificador + '-' + (versao - 1);
 
 var urls = [    
     '/',
+    '/gentileza',
+    '/perfil',
     'bundle.js',
     'style.css',
     'img/avatars.png',
